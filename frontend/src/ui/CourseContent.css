@@ -1,0 +1,14 @@
+.feedback-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.feedback-container > button, select{
+    width: 200px;
+}
+
+.feedback-container > div{
+    margin-bottom: -10px;
+}
+

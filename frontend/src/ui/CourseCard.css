@@ -1,0 +1,23 @@
+.course-card{
+    margin: 1rem;
+    height: 170px;
+    color: black;
+    padding: 15px;
+    border-radius: 7px;
+    background-color: rgb(235, 236, 236);
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 200ms;
+}
+
+.course-card:hover{
+    background-color: rgb(255, 233, 214);
+}
+
+.course-card > h5{
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.course-card > h1{
+    font-family: 'Cabin', sans-serif;
+}

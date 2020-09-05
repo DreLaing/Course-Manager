@@ -1,0 +1,27 @@
+.nav-container{
+    background-color: rgb(42, 58, 110);
+}
+
+.nav-logo-container > strong{
+    font-size: 30px;
+    color: white;
+}
+.nav-adtelligent-logo{
+    margin-top: -15px;
+    height: 70px;
+    width: 70px;
+}
+
+.nav-links{
+    display:flex;
+    white-space: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 50%;
+    align-items: center;
+}
+
+.nav-item{
+    color: white;
+    font-family: 'Cabin', sans-serif;
+}
