@@ -16,8 +16,8 @@
 }
 
 .course-content-department{
-    color: white;
-    background-color: rgb(233, 111, 41);
+    color: rgb(233, 111, 41);
+    font-weight: 400;
     font-size: 20px;
     padding: 8px;
     border-radius: 15px;

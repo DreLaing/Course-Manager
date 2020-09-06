@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import '../../ui/AdminCourseContent.css'
+import { useHistory } from 'react-router-dom'
+import './ui/AdminCourseContent.css'
 import axios from 'axios'
 import Navbar from '.././Navbar'
 import AdminNav from './AdminNav'
 import ContentCard from '../ContentCard'
 
 const AdminCourseContent = () => {
+    const token = localStorage.getItem("token")
+    const history = useHistory()
     const [editMode, setEditMode] = useState(false)
     const courseID = JSON.parse(localStorage.getItem("course"))
     const [courseInfo, setCourseInfo] = useState({
@@ -15,9 +18,10 @@ const AdminCourseContent = () => {
         feedback: [],
         skills: ['']
     })
-
+    
     useEffect(()=>{
-        axios.get(`http://localhost:5000/user/get-course/${courseID}`)
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+        axios.get(`http://localhost:5000/admin/get-course/${courseID}`)
         .then(course => {
             console.log(course.data.content)
             setCourseInfo({
@@ -28,7 +32,7 @@ const AdminCourseContent = () => {
                 content: course.data.content
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => history.push('/'))
     }, [])
 
     const handleResourceChange = (e, index) =>{
@@ -85,7 +89,12 @@ const AdminCourseContent = () => {
     }
 
     const deleteCourse = () =>{
-        
+        axios.delete(`http://localhost:5000/admin/delete-course/${courseID}`)
+        .then(course =>{
+            console.log(course)
+            history.push('/admin')
+        })
+        .catch(err => console.log(err))
     }
 
     const renderEditMode = () =>{
@@ -168,7 +177,7 @@ const AdminCourseContent = () => {
             <div className='container course-content-container'>
             <div className='button-container'>
                 <button type="button" class="btn btn-elegant" onClick={()=> setEditMode(true)}>Edit Course</button>
-                <button type="button" class="btn btn-danger" onClick={()=> console.log(courseInfo)}>Delete Course</button>
+                <button type="button" class="btn btn-danger" onClick={()=> deleteCourse()}>Delete Course</button>
             </div>
             {editMode===true ? renderEditMode()
              : <div>

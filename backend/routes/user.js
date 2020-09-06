@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const User = require('../models/userModel')
 const Course = require('../models/courseModel')
-const isRegistered = require('./validation')
+const isRegistered = require('../validation/isRegisteredForCourse')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 
 
 // ----CREATES USER----
@@ -32,7 +34,7 @@ router.route('/get-courses').get((req,res)=>{
 })
 
 // GET COURSE BY ID
-router.route('/get-course/:user/:course').all(isRegistered).get((req,res)=>{
+router.get('/get-course/:user/:course', isRegistered, (req,res)=>{
     Course.findById(req.params.course)
     .then(course => {
         const response = {
@@ -41,7 +43,8 @@ router.route('/get-course/:user/:course').all(isRegistered).get((req,res)=>{
             coursename: course.coursename,
             content: course.content,
             feedback: course.feedback,
-            registered: req.registered
+            registered: req.registered,
+            completed: req.completed
         }
         // console.log(response)
         res.json(response)
@@ -69,6 +72,15 @@ router.route('/completed/:user/:course').post((req,res)=>{
         user.coursesCompleted.push(req.params.course)
         user.save()
         res.json(user)
+    })
+    .catch(err => res.json(err))
+})
+
+// GET COMPLETED COURSES
+router.get('/completed/:user', (req, res)=>{
+    User.findById(req.params.user).populate("coursesCompleted")
+    .then(user =>{
+        res.json(user.coursesCompleted)
     })
     .catch(err => res.json(err))
 })
@@ -111,17 +123,26 @@ router.route('/:id').get((req,res)=>{
 router.route('/login').post((req,res)=>{
     const email = req.body.email;
     let user;
-    User.find({email: email})
+    User.find({email: email, userType:'Employee'})
     .then(queryUser => {
         if(queryUser.length!==0){
-            console.log(queryUser)
+            // console.log(queryUser)
             user = queryUser
                 bcrypt.compare(req.body.password, user[0].password, (err, isMatch) =>{
                     if(!isMatch){
                         res.status(203).json('Wrong password')
                     }
                     else{
-                        res.json(user)
+                        const token = jwt.sign({
+                            _id: user[0]._id,
+                            email: user[0].email,
+                            courses: user[0].courses,
+                            userType: user[0].userType
+                        }, process.env.JWT_KEY, {
+                            expiresIn: '1h'
+                        })
+                        res.status(200).json(token)
+                        console.log(token)
                     }      
                 })
             }

@@ -24,7 +24,8 @@ const UserNav = () => {
             
                 <div class="navbar-nav mr-auto nav-links">                    
                     <Link className='nav-item' to={`/user/${userID}`}>My courses</Link>
-                    <Link className='nav-item' to={`/user/all-courses/${userID}`}>All courses</Link>                   
+                    <Link className='nav-item' to={`/user/all-courses/${userID}`}>All courses</Link>    
+                    <Link className='nav-item' to={`/user/${userID}/completed-courses`}>Completed Courses</Link>               
                 </div>
             </div>
             

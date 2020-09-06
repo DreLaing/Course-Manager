@@ -1,4 +1,9 @@
 .comment-card{
-    border: 1px gray solid;
-    margin: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgb(236, 235, 235);
+    background-color: rgb(236, 235, 235);
+    padding: 20px;
+    border-radius: 5px;
+    width: 500px;
 }

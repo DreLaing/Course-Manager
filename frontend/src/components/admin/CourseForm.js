@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import '../../ui/CourseForm.css'
+import './ui/CourseForm.css'
+import AdminNav from './AdminNav'
 import Navbar from '.././Navbar'
 
 const CourseForm = () => {
     const history = useHistory()
+    const token = localStorage.getItem("token")
     const [coursename, setCoursename] = useState()
     const [department, setDepartment] = useState()
     const [skills, setSkills] = useState([''])
@@ -14,6 +16,7 @@ const CourseForm = () => {
     ])
 
     const submitCourse = () =>{
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.post(`http://localhost:5000/admin/create-course`, {
             coursename,
             department,
@@ -27,7 +30,7 @@ const CourseForm = () => {
             setCoursename('')
             history.push('/admin')
         })
-        .catch(err => console.log(err))
+        .catch(err => history.push('/'))
     }
 
     const handleResourceChange = (e, index) =>{
@@ -68,7 +71,7 @@ const CourseForm = () => {
 
     return (
         <div>
-            <Navbar />
+            <AdminNav />
             <div className='form-container container'>
                 <h1>Create Course</h1>
 

@@ -11,6 +11,10 @@
     background-color: white;
 }
 
+.text-center{
+    margin-left: -12px;
+}
+
 .modal{
     background-color: white;
     display:flex;

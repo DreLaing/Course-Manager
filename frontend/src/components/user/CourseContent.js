@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import CourseCard from './CourseCard'
+import { Link, useHistory } from 'react-router-dom'
+// import CourseCard from '../CourseCard'
 import axios from 'axios'
-import '../ui/CourseContent.css'
-import CommentCard from './user/CommentCard'
-import UserNav from './user/UserNav'
+import '../../ui/CourseContent.css'
+import CommentCard from '../CommentCard'
+import UserNav from './UserNav'
+import CheckIcon from '@material-ui/icons/Check';
+import LinkIcon from '@material-ui/icons/Link';
+import StarRateIcon from '@material-ui/icons/StarRate';
 
 const CourseContent = (props) => {
+    const token = localStorage.getItem("token")
+    const history = useHistory()
     const userID = JSON.parse(localStorage.getItem("user"))
     const courseID = JSON.parse(localStorage.getItem("course"))
     const [feedback, setFeedback] = useState({
@@ -35,6 +40,7 @@ const CourseContent = (props) => {
     }
 
     useEffect(()=>{
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`http://localhost:5000/user/get-course/${userID}/${courseID}`)
         .then(course => {
             console.log(course.data)
@@ -47,7 +53,7 @@ const CourseContent = (props) => {
                 registered: course.data.registered
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => history.push('/'))
     }, [])
 
     const registerForCourse = () =>{
@@ -70,7 +76,7 @@ const CourseContent = (props) => {
                 
                 {courseInfo.registered==='no' ? <button 
                 type="button" 
-                class="btn btn-indigo"
+                class="btn btn-indigo button-container"
                 onClick={()=> registerForCourse()}
                 >
                     Register for course
@@ -78,7 +84,7 @@ const CourseContent = (props) => {
                     : 
                     <button 
                     type="button" 
-                    class="btn btn-blue-grey"
+                    class="btn btn-blue-grey button-container"
                     onClick={()=> markAsCompleted()}
                     >
                         Mark as completed
@@ -86,31 +92,36 @@ const CourseContent = (props) => {
 
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
                     <span className='course-content-department'>{courseInfo.department}</span>
-                        <div className='content-resource-skill-container'>
-                            <div>
+                        <div className='content-resource-skill-containe'>
+                        <div className='content-skills-header-container'>
+                            <h3>What you'll learn</h3>
+                            <div className='content-skills-container'>
+                                {courseInfo.skills.map(skill => {
+                                        return <div className='content-skills-icon-container'>
+                                                <CheckIcon />
+                                                <span>{skill}</span>
+                                                {/* <hr/> */}
+                                            </div>
+                                        })}
+                            </div>
+                        </div>
+                            <div className='content-course-header-container'>
+                                <h3>Course Content</h3>
+                                <div className='content-container'>
                                 {courseInfo.content.map(link => {
                                     return <div>
-                                        <h3 className='resource-text'> Resource: {link.resource} </h3>
-                                        <h5><a href={link.link} target="_blank">Link to resource</a></h5>
-                                        <hr/>
+                                        {/* <h3 className='resource-text'> Resource: {link.resource} </h3> */}
+                                        <LinkIcon />
+                                        <h5><a href={link.link} target="_blank">{link.resource}</a></h5>
                                     </div>
                                 })}
                             </div>
-                            <div>
-                                <h4 className='skills-text'>Skills <i class="fa fa-cogs" aria-hidden="true"></i></h4>
-                                <hr/>
-                                {courseInfo.skills.map(skill => {
-                                return <>
-                                        <h4>{skill}</h4>
-                                        <hr/>
-                                    </>
-                                })}
                             </div>
                         </div>
                 </div>
             
-            <div class="md-form feedback-container">
             <p>Give us feedback:</p>
+            <div class="md-form feedback-container">
             <div class="md-form amber-textarea active-amber-textarea">
                 <i class="fas fa-pencil-alt prefix"></i>
                 <textarea id="form22" class="md-textarea form-control" rows="3"

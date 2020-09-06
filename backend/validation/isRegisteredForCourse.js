@@ -8,8 +8,10 @@ const isRegistered = (req, res, next) =>{
             req.registered = 'yes'
             next()
         } else {
-            const registered = 'registered'
             req.registered = 'no'
+            if(user.coursesCompleted.indexOf(req.params.course)!== -1){
+                req.completed = 'no'
+            }
             next()
         }
     })

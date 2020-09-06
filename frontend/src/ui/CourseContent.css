@@ -1,14 +1,71 @@
-.feedback-container{
+.content-skills-header-container{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 5px;
+    width: 500px;
+}
+
+.content-skills-header-container > h3{
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.content-course-header-container > h3{
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.content-skills-container{
     display: flex;
-    flex-direction: column;
+}
+
+.content-skills-container > div{
+    display: flex;
+    flex-basis: 50%;
+    flex-direction: row;
+    align-items: center;
+    width: 250px;
+}
+
+.content-container{
+    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    width: 500px;
+    padding: 20px;
+    border-radius: 5px;
+} 
+
+.content-container > div{
+    display: flex;
+}
+.content-container > div > h5{
+    margin-left: 1rem;
+}
+.feedback-container{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 40% 30% 20%;
+    align-items: center;
     margin-top: 5rem;
+    width: 1000px;
 }
 
 .feedback-container > button, select{
     width: 200px;
+    height: 50px;
 }
 
 .feedback-container > div{
     margin-bottom: -10px;
+}
+
+.button-container{
+    position: absolute;
+    left: 80%;
+    display: flex;
 }
 

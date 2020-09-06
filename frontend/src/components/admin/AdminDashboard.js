@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import '../../ui/AdminDashboard.css'
+import './ui/AdminDashboard.css'
 import axios from 'axios'
 import Navbar from '../Navbar'
 import CourseCard from '../CourseCard'
@@ -9,14 +9,18 @@ import AdminNav from './AdminNav'
 const AdminDashboard = () => {
     const history = useHistory()
     const [coursesInfo, setCoursesInfo] = useState([])
+    const token = localStorage.getItem("token")
+
 
     useEffect(()=>{
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`http://localhost:5000/admin/get-courses`)
         .then(courses => {
-            setCoursesInfo(courses.data)
             console.log(courses.data)
+            setCoursesInfo(courses.data)
+
         })
-        .catch(err => console.log(err))
+        .catch(err => history.push('/'))
     }, [])
     return (
         <>
