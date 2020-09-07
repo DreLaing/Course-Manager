@@ -18,6 +18,7 @@ const AllCourses = () => {
             console.log(courses.data)
         })
         .catch(err => console.log(err))
+        
     }, [])
 
     return (

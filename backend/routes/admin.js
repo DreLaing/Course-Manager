@@ -1,10 +1,28 @@
 const router = require('express').Router()
 const Course = require('../models/courseModel')
 const User = require('../models/userModel')
+const Department = require('../models/departmentModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
+
+// CREATE NEW DEPARTMENT
+router.post('/new-department', (req,res)=>{
+    const newDepartment = new Department({
+        department: req.body.department
+    })
+    newDepartment.save()
+    .then(department => res.json(department))
+    .catch(err => res.json(err))
+})
+
+// GET DEPARTMENTS
+router.get('/get-departments', (req, res)=>{
+    Department.find()
+    .then(departments => res.json(departments))
+    .catch(err => res.json(err))
+})
 
 // CREATES NEW USER
 router.route('/new-user').post(async (req, res) =>{
@@ -24,7 +42,7 @@ router.route('/new-user').post(async (req, res) =>{
 })
 // GET ALL COURSES
 router.route('/get-courses').get((req,res)=>{
-    Course.find().sort({"updatedAt": -1})
+    Course.find().sort({"updatedAt": -1}).populate("department")
     .then(course => {
         const response = []
         course.map(course => {
@@ -37,10 +55,10 @@ router.route('/get-courses').get((req,res)=>{
 })
 // GET COURSE BY ID
 router.get('/get-course/:course', (req,res)=>{
-    Course.findById(req.params.course)
+    Course.findById(req.params.course).populate("department")
     .then(course => {
         const response = {
-            department: course.department,
+            department: course.department.department,
             skills: course.skills,
             coursename: course.coursename,
             content: course.content,
@@ -94,7 +112,10 @@ router.route('/delete-course/:course').delete((req,res)=>{
             }
         })
     })
-    .then(course => res.json(`${course.coursename} deleted!`))
+    .then(course => {
+        res.json(`${course.coursename} deleted!`)
+        console.log(`${course.coursename} deleted!`)
+    })
     .catch(err => res.json(err))
 })
 

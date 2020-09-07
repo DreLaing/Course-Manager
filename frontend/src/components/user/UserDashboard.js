@@ -24,7 +24,7 @@ const UserDashboard = () => {
                 courses: res.data[0].courses
             })
         })
-        .catch(err => history.push('/'))
+        .catch(err => /*history.push('/')*/ console.log(err))
     }, [])
 
     return (

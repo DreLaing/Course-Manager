@@ -20,7 +20,7 @@ const CompletedCourses = () => {
             setCourses(courses.data)
             console.log(courses.data)
         })
-        .catch(err => history.push('/unauthorized'))
+        .catch(err => history.push('/'))
     },[])
     return (
         <>

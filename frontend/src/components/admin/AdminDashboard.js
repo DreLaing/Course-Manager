@@ -26,8 +26,8 @@ const AdminDashboard = () => {
         <>
         <AdminNav />
         <div className='container'>
-            <button type="button" class="btn btn-deep-orange" onClick={()=>history.push('/admin/new-course')}>Create new course <i class="fa fa-plus" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-indigo" onClick={()=>history.push('/admin/new-user')}>Create new User <i class="fa fa-plus" aria-hidden="true"></i></button>
+            {/* <button type="button" class="btn btn-deep-orange" onClick={()=>history.push('/admin/new-course')}>Create new course <i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-indigo" onClick={()=>history.push('/admin/new-user')}>Create new User <i class="fa fa-plus" aria-hidden="true"></i></button> */}
             <div className='all-courses-container'>
                 {coursesInfo.map(course => <Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/admin/${course._id}`}>
                         <CourseCard course={course}/> </Link>)}

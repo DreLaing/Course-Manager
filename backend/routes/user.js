@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../models/userModel')
 const Course = require('../models/courseModel')
+const Department = require('../models/departmentModel')
 const isRegistered = require('../validation/isRegisteredForCourse')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -24,7 +25,7 @@ router.route('/new-user').post(async (req, res) =>{
 
 // ----GET ALL COURSES----
 router.route('/get-courses').get((req,res)=>{
-    Course.find()
+    Course.find().populate("department")
     .then(course => {
         const response = []
         course.map(course => response.push({coursename: course.coursename, _id: course._id, department: course.department}))
@@ -35,10 +36,10 @@ router.route('/get-courses').get((req,res)=>{
 
 // GET COURSE BY ID
 router.get('/get-course/:user/:course', isRegistered, (req,res)=>{
-    Course.findById(req.params.course)
+    Course.findById(req.params.course).populate("department")
     .then(course => {
         const response = {
-            department: course.department,
+            department: course.department.department,
             skills: course.skills,
             coursename: course.coursename,
             content: course.content,
@@ -78,9 +79,15 @@ router.route('/completed/:user/:course').post((req,res)=>{
 
 // GET COMPLETED COURSES
 router.get('/completed/:user', (req, res)=>{
-    User.findById(req.params.user).populate("coursesCompleted")
+    User.findById(req.params.user).populate({
+        path: 'coursesCompleted',
+        populate: {
+            path: 'department'
+        }
+    })
     .then(user =>{
         res.json(user.coursesCompleted)
+        console.log()
     })
     .catch(err => res.json(err))
 })
@@ -114,8 +121,18 @@ router.route('/find/:searchValue').get((req,res)=>{
 
 // ----GET USER INFORMATION----
 router.route('/:id').get((req,res)=>{
-    User.find({"_id": req.params.id}).populate("courses")
-    .then(user => res.json(user))
+    User.find({"_id": req.params.id}).populate({
+        path: 'courses',
+        populate:{
+            path: 'department'
+        }
+    })
+    .then(user => {
+        const response = user
+        res.json(response)
+        console.log(`Response ${response}`)
+        console.log(`User:${user}`)
+    })
     .catch(err => res.json(err))
 })
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import './ui/CourseForm.css'
@@ -10,10 +10,24 @@ const CourseForm = () => {
     const token = localStorage.getItem("token")
     const [coursename, setCoursename] = useState()
     const [department, setDepartment] = useState()
+    const [departments, setDepartments] = useState([{
+        _id: '',
+        department: ''
+    }])
     const [skills, setSkills] = useState([''])
     const [content, setContent] = useState([
         {resource: '', link: ''}
     ])
+
+    useEffect(()=>{
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+        axios.get(`http://localhost:5000/admin/get-departments`)
+        .then(departments => {
+            console.log(departments.data)
+            setDepartments(departments.data)
+        })
+        .catch(err => history.push('/'))
+    }, [])
 
     const submitCourse = () =>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
@@ -86,11 +100,10 @@ const CourseForm = () => {
 
                 {/* ----SELECT DEPARTMENT---- */}
                 <select class="browser-default custom-select" onChange={e => setDepartment(e.target.value)}>
-                    <option selected>Select Department</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Graphic Design">Graphic Design</option>
-                    <option value="Video Production">Video Production</option>
-                    <option value="Digital Advertising">Digital Advertising</option>
+                <option selected>Select Department</option>
+                    {departments.map(department =>{
+                        return <option value={department._id}>{department.department}</option>
+                    })}
                 </select>
 
 

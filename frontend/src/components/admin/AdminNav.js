@@ -20,6 +20,9 @@ const AdminNav = () => {
                     <img className='nav-adtelligent-logo' src={require('../../images/adtelligent-logo.png')}/>
                     <strong>Adtelligent</strong>
                 </Link>
+                <Link to={'/admin/new-course'}>New Course</Link>
+                <Link to={'/admin/departments'}>Departments</Link>
+                <Link to={'/admin/new-user'}>New User</Link>
         </nav>
     </div>
     )

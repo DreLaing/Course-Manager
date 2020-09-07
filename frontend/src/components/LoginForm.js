@@ -80,7 +80,7 @@ const LoginForm = (props) => {
                 {/* <!-- Register --> */}
 
                 {/* <!-- Social login --> */}
-                <Link>Admin Login</Link>
+                {/* <Link>Admin Login</Link> */}
                     {/* <a href="#" class="mx-1" role="button"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="mx-1" role="button"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="mx-1" role="button"><i class="fab fa-linkedin-in"></i></a>

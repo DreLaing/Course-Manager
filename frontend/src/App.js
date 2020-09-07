@@ -15,6 +15,7 @@ import AllCourses from './components/user/AllCourses'
 import CreateUser from './components/admin/CreateUser'
 import CompletedCourses from './components/user/CompletedCourses'
 import Unauthorized from './components/Unauthorized'
+import Departments from './components/admin/Departments'
 
 
 function App() {
@@ -48,11 +49,11 @@ function App() {
           <Route path='/admin/new-course' exact={true}>
             <CourseForm />
           </Route>
+          <Route path='/admin/departments' exact={true}>
+            <Departments />
+          </Route>
           <Route path='/admin/:course' exact={true}>
             <AdminCourseContent />
-          </Route>
-          <Route path='/unauthorized' exact={true}>
-            <Unauthorized />
           </Route>
           <Route path='/' exact={true}>
             <Login />

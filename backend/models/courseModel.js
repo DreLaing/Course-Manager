@@ -8,9 +8,11 @@ const feedbackSchema = mongoose.Schema({
     timestamps:true
 }
 )
+
 const courseSchema = mongoose.Schema({
     coursename: {type: String, required: true},
-    department:{type: String, enum:['Graphic Design', 'Web Development', 'Video Production', 'Digital Advertising', 'All Departments'], default:'All Departments'},
+    // department:{type: String, enum:['Graphic Design', 'Web Development', 'Video Production', 'Digital Advertising', 'All Departments'], default:'All Departments'},
+    department: {type: mongoose.Schema.Types.ObjectId, ref:'Department'},
     content:[{
         resource: String,
         link: String,
@@ -28,4 +30,5 @@ const courseSchema = mongoose.Schema({
 
 const Course = mongoose.model('Course', courseSchema);
 module.exports = Course
+
 

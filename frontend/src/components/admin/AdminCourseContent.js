@@ -9,6 +9,10 @@ import ContentCard from '../ContentCard'
 const AdminCourseContent = () => {
     const token = localStorage.getItem("token")
     const history = useHistory()
+    const [departments, setDepartments] = useState([{
+        _id: '',
+        department: ''
+    }])
     const [editMode, setEditMode] = useState(false)
     const courseID = JSON.parse(localStorage.getItem("course"))
     const [courseInfo, setCourseInfo] = useState({
@@ -23,7 +27,7 @@ const AdminCourseContent = () => {
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`http://localhost:5000/admin/get-course/${courseID}`)
         .then(course => {
-            console.log(course.data.content)
+            // console.log(course.data.content)
             setCourseInfo({
                 coursename: course.data.coursename,
                 department: course.data.department,
@@ -31,6 +35,14 @@ const AdminCourseContent = () => {
                 skills: course.data.skills,
                 content: course.data.content
             })
+        })
+        .catch(err => history.push('/'))
+
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+        axios.get(`http://localhost:5000/admin/get-departments`)
+        .then(departments => {
+            console.log(departments.data)
+            setDepartments(departments.data)
         })
         .catch(err => history.push('/'))
     }, [])
@@ -109,10 +121,9 @@ const AdminCourseContent = () => {
         {/* ----SELECT DEPARTMENT---- */}
         <select class="browser-default custom-select" onChange={e => setCourseInfo({...courseInfo, department:e.target.value})}>
             <option selected>Select Department</option>
-            <option value="Web Development">Web Development</option>
-            <option value="Graphic Design">Graphic Design</option>
-            <option value="Video Production">Video Production</option>
-            <option value="Digital Advertising">Digital Advertising</option>
+           {departments.map(department =>{
+                return <option value={department._id}>{department.department}</option>
+            })}
         </select>
 
         <div className='resource-skill-container'>
