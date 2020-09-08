@@ -66,8 +66,8 @@ router.get('/get-course/:course', (req,res)=>{
             registered: req.registered,
             completed: req.completed
         }
-        // console.log(response)
-        res.json(response)
+        console.log(course)
+        res.json(course)
     })
     .catch(err => res.json(err))
 })
@@ -91,13 +91,19 @@ router.route('/create-course').post((req,res)=>{
 
 // EDIT COURSE INFO
 router.route('/edit-course/:id').post((req,res)=>{
-    Course.findByIdAndUpdate(req.params.id)
+    Course.findByIdAndUpdate(req.params.id).populate("department")
     .then(course => {
         course.coursename = req.body.coursename,
         course.department = req.body.department,
         course.skills = req.body.skills,
         course.content = req.body.content
         course.save()
+        const response = {
+            coursename: course.coursename,
+            department: course.department.department,
+            skills: course.skills,
+            content: course.content
+        }
         res.json(course)
     })
     .catch(err => res.json(err))

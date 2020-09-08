@@ -12,7 +12,7 @@ const CourseCard = (props) => {
                 <h6>Course</h6>
                 <h4>{props.course.coursename}</h4>
             </div>
-            <h5>{props.course.department.department}</h5> 
+            <h5>{props.course?.department?.department}</h5> 
         </div>
     )
 }

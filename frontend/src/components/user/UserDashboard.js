@@ -24,19 +24,16 @@ const UserDashboard = () => {
                 courses: res.data[0].courses
             })
         })
-        .catch(err => /*history.push('/')*/ console.log(err))
+        .catch(err => history.push('/'))
     }, [])
 
     return (
         <>
         <UserNav />
-        <div className='container'>
-            {userInfo.email}
-            <div className='dashboard-content'>
-                {userInfo.courses.map(course =><Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${id}/${course._id}`}>
-                    <CourseCard course={course}/>
-                </Link>)}
-            </div>
+        <div className='dashboard-content container'>
+            {userInfo.courses.map(course =><Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${id}/${course._id}`}>
+                <CourseCard course={course}/>
+            </Link>)}
         </div>
         </>
     )

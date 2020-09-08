@@ -8,7 +8,10 @@ import AdminNav from './AdminNav'
 
 const AdminDashboard = () => {
     const history = useHistory()
-    const [coursesInfo, setCoursesInfo] = useState([])
+    const [coursesInfo, setCoursesInfo] = useState([{
+        coursename: '',
+        department: ''
+    }])
     const token = localStorage.getItem("token")
 
 
@@ -25,14 +28,10 @@ const AdminDashboard = () => {
     return (
         <>
         <AdminNav />
-        <div className='container'>
-            {/* <button type="button" class="btn btn-deep-orange" onClick={()=>history.push('/admin/new-course')}>Create new course <i class="fa fa-plus" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-indigo" onClick={()=>history.push('/admin/new-user')}>Create new User <i class="fa fa-plus" aria-hidden="true"></i></button> */}
-            <div className='all-courses-container'>
+            <div className='dashboard-content container'>
                 {coursesInfo.map(course => <Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/admin/${course._id}`}>
                         <CourseCard course={course}/> </Link>)}
             </div>
-        </div>
         
         </>
     )

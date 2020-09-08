@@ -18,6 +18,7 @@ const AdminCourseContent = () => {
     const [courseInfo, setCourseInfo] = useState({
         coursename: '',
         department: '',
+        departmentID: '',
         content: [''],
         feedback: [],
         skills: ['']
@@ -30,7 +31,7 @@ const AdminCourseContent = () => {
             // console.log(course.data.content)
             setCourseInfo({
                 coursename: course.data.coursename,
-                department: course.data.department,
+                department: course.data.department.department,
                 feedback: course.data.feedback,
                 skills: course.data.skills,
                 content: course.data.content
@@ -91,13 +92,15 @@ const AdminCourseContent = () => {
     const makeUpdate = () =>{
         axios.post(`http://localhost:5000/admin/edit-course/${courseID}`,{
             coursename: courseInfo.coursename,
-            department: courseInfo.department,
+            department: courseInfo.departmentID,
             skills: courseInfo.skills,
             content: courseInfo.content
         })
         .then(course => console.log(course))
         .catch(err => console.log(err))
         setEditMode(false)
+        console.log(courseInfo.department)
+        window.location.reload()
     }
 
     const deleteCourse = () =>{
@@ -119,8 +122,8 @@ const AdminCourseContent = () => {
                     />
                 </div>
         {/* ----SELECT DEPARTMENT---- */}
-        <select class="browser-default custom-select" onChange={e => setCourseInfo({...courseInfo, department:e.target.value})}>
-            <option selected>Select Department</option>
+        <select class="browser-default custom-select" onChange={e => setCourseInfo({...courseInfo, department:e.target.value, departmentID: e.target.value})} required>
+            <option>------SELECT A DEPARTMENT------</option>
            {departments.map(department =>{
                 return <option value={department._id}>{department.department}</option>
             })}
@@ -193,7 +196,7 @@ const AdminCourseContent = () => {
             {editMode===true ? renderEditMode()
              : <div>
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
-                    <span className='course-content-department'>{courseInfo.department}</span>
+                    <span className='course-content-department'>{courseInfo?.department}</span>
                         <div className='content-resource-skill-container'>
                             <div>
                                 {courseInfo.content.map(link => {

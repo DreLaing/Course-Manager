@@ -18,7 +18,9 @@
 
 .course-card-top{
     width: 100%;
-    background-color: rgb(42, 58, 110);
+    /* background-color: rgb(42, 58, 110); */
+    background: rgb(42,58,110);
+background: linear-gradient(90deg, rgba(42,58,110,1) 0%, rgba(124,126,132,1) 100%, rgba(121,50,9,0.9923319669664741) 100%);
     padding: 7px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;

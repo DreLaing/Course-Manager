@@ -70,9 +70,15 @@ router.route('/completed/:user/:course').post((req,res)=>{
     User.findById(req.params.user)
     .then(user =>{
         user.courses.pull(req.params.course)
-        user.coursesCompleted.push(req.params.course)
-        user.save()
-        res.json(user)
+        if(user.coursesCompleted.indexOf(req.params.course)!== -1){
+            user.save()
+            res.json(user)
+        }
+        else{
+            user.coursesCompleted.push(req.params.course)
+            user.save()
+            res.json(user)
+        }
     })
     .catch(err => res.json(err))
 })
@@ -87,7 +93,7 @@ router.get('/completed/:user', (req, res)=>{
     })
     .then(user =>{
         res.json(user.coursesCompleted)
-        console.log()
+        console.log(user)
     })
     .catch(err => res.json(err))
 })

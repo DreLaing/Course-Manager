@@ -27,7 +27,15 @@ const Departments = () => {
     return (
         <>
         <AdminNav />
-        <div className='container'>
+        <div className='container text-center' style={{
+            width: '500px',
+            position: 'relative',
+            left:'35%',
+            top: '50px',
+            backgroundColor: 'white',
+            padding: '30px',
+            borderRadius: '7px'
+        }}>
         <button type="button" class="btn btn-indigo"
             onClick={() =>{ 
                 modal.current.classList.add('active');}}>Create new Department <i class="fa fa-plus" aria-hidden="true"></i></button>

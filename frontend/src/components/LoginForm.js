@@ -24,6 +24,7 @@ const LoginForm = (props) => {
             const decoded = decode(response.data)
             console.log(decoded.userType)
             localStorage.setItem("token", response.data)
+            localStorage.setItem("email", JSON.stringify(decoded.email))
             if(response.status === 200){
                 // console.log(response.data[0])
 
@@ -48,12 +49,12 @@ const LoginForm = (props) => {
 
     return (
         <div class='login-form modal'>
-            <form class="text-center" action="#!">
+            <form class="" action="#!">
                 <CloseIcon className='close-icon' onClick={() =>{props.reference.current.classList.remove('active');
                                                                     setEmail('');
                                                                     setPassword('')}}/>
 
-                <p class="h4 mb-4">{props.clicked}</p>
+                <p class="h4 mb-4 text-center">Sign in</p>
                 {/* <!-- Email --> */}
                  <div class="md-form">
                     <i className={invalidEmail===true ? 'fas fa-user prefix invalid' : 'fas fa-user prefix'}></i>
