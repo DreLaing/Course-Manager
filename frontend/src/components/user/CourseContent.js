@@ -25,7 +25,9 @@ const CourseContent = (props) => {
         content: [],
         feedback: [],
         skills: [],
-        registered: ''
+        registered: '',
+        completed:'',
+        duration: ''
     })
 
     const submitFeedback = () =>{
@@ -50,7 +52,9 @@ const CourseContent = (props) => {
                 feedback: course.data.feedback,
                 skills: course.data.skills,
                 content: course.data.content,
-                registered: course.data.registered
+                registered: course.data.registered,
+                completed: course.data.completed,
+                duration: course.data?.duration
             })
         })
         .catch(err => history.push('/'))
@@ -64,7 +68,10 @@ const CourseContent = (props) => {
 
     const markAsCompleted = () =>{
         axios.post(`http://localhost:5000/user/completed/${userID}/${courseID}`,{})
-        .then(setCourseInfo({...courseInfo, registered:'no'}))
+        .then(()=>{
+            setCourseInfo({...courseInfo, registered:'no'})
+            window.location.reload()
+        })
         .catch(err => console.log(err))
     }
     
@@ -74,7 +81,7 @@ const CourseContent = (props) => {
         <div className='container'>
             <div className='course-content-container'>
                 
-                {courseInfo.registered==='no' ? <button 
+            {courseInfo.completed === 'yes' ? <h2 className='button-container'>Completed in {courseInfo.duration}</h2> : (<>{courseInfo.registered==='no' ? <button 
                 type="button" 
                 class="btn btn-indigo button-container"
                 onClick={()=> registerForCourse()}
@@ -88,7 +95,7 @@ const CourseContent = (props) => {
                     onClick={()=> markAsCompleted()}
                     >
                         Mark as completed
-                        </button>}
+                        </button>}</>)}
 
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
                     <span className='course-content-department'>{courseInfo.department}</span>

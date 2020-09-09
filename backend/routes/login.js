@@ -12,13 +12,13 @@ router.post('/', (req, res)=>{
             // console.log(queryUser)
             user = queryUser
             bcrypt.compare(req.body.password, user[0].password, (err, isMatch) =>{
-                if(err){
+                if(!isMatch){
                     console.log('password')
                     res.status(203).json('Wrong password')
                 }
-                else{
+                else if (isMatch){
                     if(user[0].userType==='Employee'){
-                        console.log('logged')
+                        console.log('employee match')
                         const token = jwt.sign({
                             _id: user[0]._id,
                             email: user[0].email,
@@ -27,10 +27,10 @@ router.post('/', (req, res)=>{
                         }, process.env.JWT_KEY, {
                             expiresIn: '1h'
                         })
-                        res.json(token)
+                        res.status(200).json(token)
                     }
                     else{
-                        console.log('second log')
+                        console.log('admin match')
                         const token = jwt.sign({
                             _id: user[0]._id,
                             email: user[0].email,
@@ -39,7 +39,7 @@ router.post('/', (req, res)=>{
                         }, process.env.JWT_ADMIN_KEY, {
                             expiresIn: '1h'
                         })
-                        res.json(token)
+                        res.status(200).json(token)
                     }
                 }      
             })
@@ -47,7 +47,7 @@ router.post('/', (req, res)=>{
     else{
         res.status(404).json('No registered user with that email')
     }})
-    .catch(err => `Error: ${err}`)
+    .catch(err => res.json(err))
 })
 
 module.exports = router

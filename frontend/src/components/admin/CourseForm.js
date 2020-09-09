@@ -19,18 +19,19 @@ const CourseForm = () => {
         {resource: '', link: ''}
     ])
 
+    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+
     useEffect(()=>{
-        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`http://localhost:5000/admin/get-departments`)
         .then(departments => {
             console.log(departments.data)
             setDepartments(departments.data)
+            setDepartment(departments.data[0]._id)
         })
         .catch(err => history.push('/'))
     }, [])
 
     const submitCourse = () =>{
-        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.post(`http://localhost:5000/admin/create-course`, {
             coursename,
             department,
@@ -86,7 +87,7 @@ const CourseForm = () => {
     return (
         <div>
             <AdminNav />
-            <div className='form-container container'>
+            <form className='form-container container'>
                 <h1>Create Course</h1>
 
                 {/* ----COURSE TITLE---- */}
@@ -99,8 +100,8 @@ const CourseForm = () => {
                 </div>
 
                 {/* ----SELECT DEPARTMENT---- */}
-                <select class="browser-default custom-select" onChange={e => setDepartment(e.target.value)}>
-                <option selected>Select Department</option>
+                <select defaultValue={departments[0]._id} class="browser-default custom-select" onChange={e => setDepartment(e.target.value)}>
+                <option>Select Department</option>
                     {departments.map(department =>{
                         return <option value={department._id}>{department.department}</option>
                     })}
@@ -157,7 +158,7 @@ const CourseForm = () => {
                 </div>
                 <button type="button" class="btn btn-indigo" onClick={()=>submitCourse()}>Submit course information</button>
                 
-            </div>
+            </form>
             
         </div>
     )

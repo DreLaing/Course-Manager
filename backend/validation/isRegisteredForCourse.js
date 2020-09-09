@@ -10,6 +10,9 @@ const isRegistered = (req, res, next) =>{
         } else {
             req.registered = 'no'
             if(user.coursesCompleted.indexOf(req.params.course)!== -1){
+                req.completed = 'yes'
+            }
+            else{
                 req.completed = 'no'
             }
             next()

@@ -5,6 +5,7 @@ const Department = require('../models/departmentModel')
 const isRegistered = require('../validation/isRegisteredForCourse')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const completionTime = require('../validation/course-completion-date')
 
 
 
@@ -35,20 +36,37 @@ router.route('/get-courses').get((req,res)=>{
 })
 
 // GET COURSE BY ID
-router.get('/get-course/:user/:course', isRegistered, (req,res)=>{
+router.get('/get-course/:user/:course', isRegistered, completionTime, (req,res)=>{
     Course.findById(req.params.course).populate("department")
     .then(course => {
-        const response = {
-            department: course.department.department,
-            skills: course.skills,
-            coursename: course.coursename,
-            content: course.content,
-            feedback: course.feedback,
-            registered: req.registered,
-            completed: req.completed
+        if(req.duration){
+            const response = {
+                department: course.department.department,
+                skills: course.skills,
+                coursename: course.coursename,
+                content: course.content,
+                feedback: course.feedback,
+                registered: req.registered,
+                completed: req.completed,   
+                duration: req.duration       
+            } 
+            res.json(response) 
+            console.log(response)         
         }
-        // console.log(response)
-        res.json(response)
+        else{
+            const response = {
+                department: course.department.department,
+                skills: course.skills,
+                coursename: course.coursename,
+                content: course.content,
+                feedback: course.feedback,
+                registered: req.registered,
+                completed: req.completed,          
+            }
+            res.json(response)
+        }
+        
+        // console.log(`----RESPONSE---- ${response}`)
     })
     .catch(err => res.json(err))
 })
@@ -58,6 +76,7 @@ router.route('/add-course/:user/:course').post((req,res)=>{
     User.findById(req.params.user)
     .then(user =>{
         user.courses.push(req.params.course)
+        user.dateRegistered.push(req.params.course)
         user.save()
         console.log(user)
         res.json(user)
@@ -76,6 +95,7 @@ router.route('/completed/:user/:course').post((req,res)=>{
         }
         else{
             user.coursesCompleted.push(req.params.course)
+            user.dateCompleted.push(req.params.course)
             user.save()
             res.json(user)
         }
@@ -93,7 +113,7 @@ router.get('/completed/:user', (req, res)=>{
     })
     .then(user =>{
         res.json(user.coursesCompleted)
-        console.log(user)
+        // console.log(user)
     })
     .catch(err => res.json(err))
 })

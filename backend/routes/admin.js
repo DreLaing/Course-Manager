@@ -94,7 +94,7 @@ router.route('/edit-course/:id').post((req,res)=>{
     Course.findByIdAndUpdate(req.params.id).populate("department")
     .then(course => {
         course.coursename = req.body.coursename,
-        course.department = req.body.department,
+        // course.department = req.body.department,
         course.skills = req.body.skills,
         course.content = req.body.content
         course.save()

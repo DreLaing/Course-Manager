@@ -23,27 +23,31 @@ const AdminCourseContent = () => {
         feedback: [],
         skills: ['']
     })
+
+    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     
     useEffect(()=>{
-        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`http://localhost:5000/admin/get-course/${courseID}`)
         .then(course => {
             // console.log(course.data.content)
             setCourseInfo({
                 coursename: course.data.coursename,
-                department: course.data.department.department,
+                department: course.data?.department.department,
                 feedback: course.data.feedback,
                 skills: course.data.skills,
                 content: course.data.content
             })
         })
-        .catch(err => history.push('/'))
+        .catch(err => {
+            // history.push('/')
+            console.log(err)
+        })
 
-        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`http://localhost:5000/admin/get-departments`)
         .then(departments => {
             console.log(departments.data)
             setDepartments(departments.data)
+            setCourseInfo({...courseInfo, departmentID: departments.data[0]._id})
         })
         .catch(err => history.push('/'))
     }, [])
@@ -92,11 +96,13 @@ const AdminCourseContent = () => {
     const makeUpdate = () =>{
         axios.post(`http://localhost:5000/admin/edit-course/${courseID}`,{
             coursename: courseInfo.coursename,
-            department: courseInfo.departmentID,
+            // department: courseInfo.departmentID,
             skills: courseInfo.skills,
             content: courseInfo.content
         })
-        .then(course => console.log(course))
+        .then(course => {
+            console.log(courseInfo.departmentID)
+        })
         .catch(err => console.log(err))
         setEditMode(false)
         console.log(courseInfo.department)
@@ -113,7 +119,7 @@ const AdminCourseContent = () => {
     }
 
     const renderEditMode = () =>{
-      return <div className='edit-mode'>
+      return <form className='edit-mode' onSubmit={()=>makeUpdate()}>
        
         <div class="md-form form-lg form-course-title">
         Coursename:<input className='edit-mode-coursename' type='text' 
@@ -122,12 +128,12 @@ const AdminCourseContent = () => {
                     />
                 </div>
         {/* ----SELECT DEPARTMENT---- */}
-        <select class="browser-default custom-select" onChange={e => setCourseInfo({...courseInfo, department:e.target.value, departmentID: e.target.value})} required>
-            <option>------SELECT A DEPARTMENT------</option>
-           {departments.map(department =>{
-                return <option value={department._id}>{department.department}</option>
+        {/* <select defaultValue={departments[0]._id} class="custom-select" onChange={e => setCourseInfo({...courseInfo, department:e.target.value, departmentID: e.target.value})} required='required'>
+            <option value={departments[0]._id}>{departments[0].department}</option>
+           {departments.map((department,index) =>{
+                return index > 0 && <option value={department._id}>{department.department}</option>
             })}
-        </select>
+        </select> */}
 
         <div className='resource-skill-container'>
 
@@ -177,24 +183,24 @@ const AdminCourseContent = () => {
                         })}
                     </div>
                 </div>
-                <button type="button" class="btn btn-indigo" onClick={()=> makeUpdate()}>Update Course</button>
+                <button type="submit" class="btn btn-indigo">Update Course</button>
                 <button type="button" class="btn btn-outline-danger waves-effect" onClick={()=> {
                     setEditMode(false)
                     window.location.reload()
                 }}>Cancel</button>
-      </div>
+      </form>
     }
 
     return (
         <div>
             <AdminNav />
             <div className='container course-content-container'>
-            <div className='button-container'>
-                <button type="button" class="btn btn-elegant" onClick={()=> setEditMode(true)}>Edit Course</button>
-                <button type="button" class="btn btn-danger" onClick={()=> deleteCourse()}>Delete Course</button>
-            </div>
             {editMode===true ? renderEditMode()
              : <div>
+                    <div className='button-container'>
+                        <button type="button" class="btn btn-elegant" onClick={()=> setEditMode(true)}>Edit Course</button>
+                        <button type="button" class="btn btn-danger" onClick={()=> deleteCourse()}>Delete Course</button>
+                    </div>
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
                     <span className='course-content-department'>{courseInfo?.department}</span>
                         <div className='content-resource-skill-container'>

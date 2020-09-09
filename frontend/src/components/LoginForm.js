@@ -15,18 +15,20 @@ const LoginForm = (props) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
+        const source = axios.CancelToken.source()
         if(props.clicked==='Sign In'){
-            axios.post('http://localhost:5000/login/', {
+            axios.post('http://localhost:5000/login/',{
             email,
             password
-        })
+        }, {cancelToken: source.token} )
         .then(response =>{
             const decoded = decode(response.data)
-            console.log(decoded.userType)
-            localStorage.setItem("token", response.data)
-            localStorage.setItem("email", JSON.stringify(decoded.email))
+            console.log(response)
             if(response.status === 200){
                 // console.log(response.data[0])
+                console.log(decoded.userType)
+                localStorage.setItem("token", response.data)
+                localStorage.setItem("email", JSON.stringify(decoded.email))
 
                 if(decoded.userType==='Employee'){
                     localStorage.setItem("user", JSON.stringify(decoded._id))
@@ -37,13 +39,22 @@ const LoginForm = (props) => {
                     history.push(`/admin`)
                 }
             }
-            else if(response.status === 203){
-                console.log('Wrong password')
-                setInvalidPassword(true)
-            }   
+            // ----NOT WORKING AS IT SHOULD SINCE ADDING JWT----
+            // else if(response.status === 203){
+            //     console.log('Wrong password')
+            //     setInvalidPassword(true)
+            // }   
         })
                
-        .catch(err => setInvalidEmail(true))
+        .catch(err => {
+            setInvalidEmail(true)
+            setInvalidPassword(true)
+            console.log(err)
+        })
+        }
+
+        return () =>{
+            source.cancel('Component Unmounted')
         }
     }
 
