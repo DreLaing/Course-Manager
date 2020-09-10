@@ -25,7 +25,7 @@ router.post('/', (req, res)=>{
                             courses: user[0].courses,
                             userType: user[0].userType
                         }, process.env.JWT_KEY, {
-                            expiresIn: '1h'
+                            expiresIn: '3h'
                         })
                         res.status(200).json(token)
                     }
@@ -37,7 +37,7 @@ router.post('/', (req, res)=>{
                             courses: user[0].courses,
                             userType: user[0].userType
                         }, process.env.JWT_ADMIN_KEY, {
-                            expiresIn: '1h'
+                            expiresIn: '3h'
                         })
                         res.status(200).json(token)
                     }

@@ -25,7 +25,7 @@ const AllCourses = () => {
         <>
         <Usernav />
         <div className='container dashboard-content'>
-                {coursesInfo.map(course => <Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${userID}/${course._id}`}>
+                {coursesInfo.map((course, index) => <Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${userID}/${course._id}`}>
                         <CourseCard course={course}/> </Link>)}
         </div>
         

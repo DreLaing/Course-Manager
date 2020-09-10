@@ -102,8 +102,8 @@ const CourseForm = () => {
                 {/* ----SELECT DEPARTMENT---- */}
                 <select defaultValue={departments[0]._id} class="browser-default custom-select" onChange={e => setDepartment(e.target.value)}>
                 <option>Select Department</option>
-                    {departments.map(department =>{
-                        return <option value={department._id}>{department.department}</option>
+                    {departments.map((department, index) =>{
+                        return <option key={index} value={department._id}>{department.department}</option>
                     })}
                 </select>
 
@@ -113,7 +113,7 @@ const CourseForm = () => {
                     {/* ----COURSE RESOURCES---- */}
                     <div className='resource-column'>
                         {content.map((content, index)=>{
-                            return <div className='resource-container' key={index}>                   
+                            return <div key={index} className='resource-container' key={index}>                   
                                 <div>
                                     <div class="md-form input-container">
                                         
@@ -138,7 +138,7 @@ const CourseForm = () => {
                     {/* COURSE SKILLS */}
                     <div className='skill-column'>
                         {skills.map((skill, index)=>{
-                            return <div className='skills-container'>
+                            return <div key={index} className='skills-container'>
                                 <div>
 
                                     <div class="md-form input-container">

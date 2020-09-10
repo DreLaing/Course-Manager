@@ -16,6 +16,7 @@ import CreateUser from './components/admin/CreateUser'
 import CompletedCourses from './components/user/CompletedCourses'
 import Unauthorized from './components/Unauthorized'
 import Departments from './components/admin/Departments'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -24,36 +25,44 @@ function App() {
       <Router>
         <Switch>
         <Route path='/user/search/:searchValue' exact={true}>
-            {/* <Navbar /> */}
             <SearchResult />
+            <Footer />
           </Route>
           <Route path='/user/:id/completed-courses'>
             <CompletedCourses />
+            <Footer />
           </Route>
           <Route path='/user/all-courses/:id' exact={true}>
             <AllCourses />
+            <Footer />
           </Route>
           <Route path='/user/:id/:course' exact={true}>
             <CourseContent />
+            <Footer />
           </Route>
           <Route path='/user/:id' exact={true}>
-            {/* <Navbar /> */}
             <UserDashboard />
+            <Footer />
           </Route>
           <Route path='/admin' exact={true}>
             <AdminDashboard />
+            <Footer />
           </Route>
           <Route path='/admin/new-user' exact={true}>
             <CreateUser />
+            <Footer />
           </Route>
           <Route path='/admin/new-course' exact={true}>
             <CourseForm />
+            <Footer />
           </Route>
           <Route path='/admin/departments' exact={true}>
             <Departments />
+            <Footer />
           </Route>
           <Route path='/admin/:course' exact={true}>
             <AdminCourseContent />
+            <Footer />
           </Route>
           <Route path='/' exact={true}>
             <Login />

@@ -20,7 +20,7 @@ const courseSchema = mongoose.Schema({
     feedback: [{
         user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
         comment: String,
-        rating: {type: String, enum:['1','2','3','4','5','No rating'], default: 'No rating'}
+        rating: {type: String, enum:['1','2','3','4','5'], default: '3'}
     }],
     skills:[String]
 },{

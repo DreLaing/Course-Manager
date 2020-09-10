@@ -22,6 +22,7 @@ const AdminNav = () => {
                         <img className='nav-adtelligent-logo' src={require('../../images/adtelligent-logo.png')}/>
                         <strong>Adtelligent</strong>
                     </Link>
+                    <Link className={location.pathname===`/admin` ? 'active-link nav-item' : 'nav-item'} to={'/admin'}>Dashboard</Link>
                     <Link className={location.pathname===`/admin/new-user` ? 'active-link nav-item' : 'nav-item'} to={'/admin/new-user'}>New User</Link>
                     <Link className={location.pathname===`/admin/new-course` ? 'active-link nav-item' : 'nav-item'} to={'/admin/new-course'}>New Course</Link>
                     <Link className={location.pathname===`/admin/departments` ? 'active-link nav-item' : 'nav-item'} to={'/admin/departments'}>Departments</Link>

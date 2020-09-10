@@ -20,6 +20,7 @@
 
 .content-skills-container{
     display: flex;
+    flex-wrap: wrap;   
 }
 
 .content-skills-container > div{
@@ -27,7 +28,7 @@
     flex-basis: 50%;
     flex-direction: row;
     align-items: center;
-    width: 250px;
+    min-width: 50%;
 }
 
 .content-container{
@@ -67,5 +68,15 @@
     position: absolute;
     left: 80%;
     display: flex;
+}
+
+.course-content-container > h2{
+    font-family: 'Heebo', sans-serif;
+    white-space: nowrap;
+    color: rgb(44, 83, 44);
+}
+
+.comment-section{
+    margin-bottom: 6rem;
 }
 

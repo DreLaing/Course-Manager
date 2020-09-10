@@ -4,7 +4,7 @@ import './ui/AdminCourseContent.css'
 import axios from 'axios'
 import Navbar from '.././Navbar'
 import AdminNav from './AdminNav'
-import ContentCard from '../ContentCard'
+import CommentCard from '../CommentCard'
 
 const AdminCourseContent = () => {
     const token = localStorage.getItem("token")
@@ -167,7 +167,7 @@ const AdminCourseContent = () => {
                     <div className='skill-column edit-mode-skill-column'>
                         <h5>Skills <i class="fa fa-cogs" aria-hidden="true"></i></h5>
                         {courseInfo.skills.map((skill, index)=>{
-                            return <div className='skills-container'>
+                            return <div key={index} className='skills-container'>
                                 <div>
 
                                     <div class="md-form input-container">
@@ -205,8 +205,8 @@ const AdminCourseContent = () => {
                     <span className='course-content-department'>{courseInfo?.department}</span>
                         <div className='content-resource-skill-container'>
                             <div>
-                                {courseInfo.content.map(link => {
-                                    return <div>
+                                {courseInfo.content.map((link, index) => {
+                                    return <div key={index}>
                                         <h3 className='resource-text'> Resource: {link.resource} </h3>
                                         <h5><a href={link.link} target="_blank">Link to resource</a></h5>
                                         <hr/>
@@ -225,6 +225,12 @@ const AdminCourseContent = () => {
                             </div>
                         </div>
                 </div>}
+
+                <div className='comment-section'>
+                {courseInfo.feedback.map((feedback, index) =>{
+                    return <CommentCard key={index} user={feedback.user} comment={feedback.comment} rating={feedback.rating} />
+                })}
+            </div>
         </div>
     </div>
     )

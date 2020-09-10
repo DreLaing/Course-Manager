@@ -99,12 +99,11 @@ const CourseContent = (props) => {
 
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
                     <span className='course-content-department'>{courseInfo.department}</span>
-                        <div className='content-resource-skill-containe'>
                         <div className='content-skills-header-container'>
                             <h3>What you'll learn</h3>
                             <div className='content-skills-container'>
-                                {courseInfo.skills.map(skill => {
-                                        return <div className='content-skills-icon-container'>
+                                {courseInfo.skills.map((skill, index) => {
+                                        return <div key={index} className='content-skills-icon-container'>
                                                 <CheckIcon />
                                                 <span>{skill}</span>
                                                 {/* <hr/> */}
@@ -115,8 +114,8 @@ const CourseContent = (props) => {
                             <div className='content-course-header-container'>
                                 <h3>Course Content</h3>
                                 <div className='content-container'>
-                                {courseInfo.content.map(link => {
-                                    return <div>
+                                {courseInfo.content.map((link, index) => {
+                                    return <div key={index}>
                                         {/* <h3 className='resource-text'> Resource: {link.resource} </h3> */}
                                         <LinkIcon />
                                         <h5><a href={link.link} target="_blank">{link.resource}</a></h5>
@@ -124,7 +123,6 @@ const CourseContent = (props) => {
                                 })}
                             </div>
                             </div>
-                        </div>
                 </div>
             
             <p>Give us feedback:</p>
@@ -155,9 +153,11 @@ const CourseContent = (props) => {
             
             Comments:
             <hr/>
-            {courseInfo.feedback.map(feedback =>{
-                return <CommentCard user={feedback.user} comment={feedback.comment} rating={feedback.rating} />
-            })}
+            <div className='comment-section'>
+                {courseInfo.feedback.map((feedback, index) =>{
+                    return <CommentCard key={index} user={feedback.user} comment={feedback.comment} rating={feedback.rating} />
+                })}
+            </div>
         </div>
         </>
     )

@@ -1,5 +1,5 @@
 .nav-container{
-    background-color: rgb(42, 58, 110);
+    background-color: rgb(0, 46, 65);
 }
 
 .nav-logo-container > strong{
@@ -62,7 +62,9 @@
 }
 
 .active-link{
-    background-color: rgb(39, 39, 39);
+    /* background-color: rgb(85, 85, 85); */
     padding: 10px;
-    border-radius: 5px;
+    border-bottom: 3px solid rgb(224, 93, 33);
+    
+    /* border-radius: 5px; */
 }

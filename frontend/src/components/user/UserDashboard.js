@@ -31,7 +31,7 @@ const UserDashboard = () => {
         <>
         <UserNav />
         <div className='dashboard-content container'>
-            {userInfo.courses.map(course =><Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${id}/${course._id}`}>
+            {userInfo.courses.map((course, index) =><Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${id}/${course._id}`}>
                 <CourseCard course={course}/>
             </Link>)}
         </div>

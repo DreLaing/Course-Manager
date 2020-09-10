@@ -125,36 +125,5 @@ router.route('/delete-course/:course').delete((req,res)=>{
     .catch(err => res.json(err))
 })
 
-router.route('/login').post((req,res)=>{
-    const email = req.body.email;
-    let user;
-    User.find({email: email, userType:'Employee'})
-    .then(queryUser => {
-        if(queryUser.length!==0){
-            // console.log(queryUser)
-            user = queryUser
-                bcrypt.compare(req.body.password, user[0].password, (err, isMatch) =>{
-                    if(!isMatch){
-                        res.status(203).json('Wrong password')
-                    }
-                    else{
-                        const token = jwt.sign({
-                            _id: user[0]._id,
-                            email: user[0].email,
-                            courses: user[0].courses,
-                            userType: user[0].userType
-                        }, process.env.JWT_KEY, {
-                            expiresIn: '1h'
-                        })
-                        res.status(200).json(token)
-                        console.log(token)
-                    }      
-                })
-            }
-        else{
-            res.status(404).json('No registered user with that email')
-        }})
-    .catch(err => `Error: ${err}`)
-})
 
 module.exports = router

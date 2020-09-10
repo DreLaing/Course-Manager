@@ -29,7 +29,8 @@ const CreateUser = () => {
                  left: '35%',
                  top:'50px',
                  padding: '30px',
-                 borderRadius: '7px'}}>
+                 borderRadius: '7px',
+                 marginBottom:'5rem'}}>
 
                     <p class="h4 mb-4">New User</p>
 

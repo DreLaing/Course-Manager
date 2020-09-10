@@ -34,12 +34,13 @@ const Departments = () => {
             top: '50px',
             backgroundColor: 'white',
             padding: '30px',
-            borderRadius: '7px'
+            borderRadius: '7px',
+            marginBottom: '6rem'
         }}>
         <button type="button" class="btn btn-indigo"
             onClick={() =>{ 
                 modal.current.classList.add('active');}}>Create new Department <i class="fa fa-plus" aria-hidden="true"></i></button>
-            {departments.map(department => <h1>{department.department}</h1>)}
+            {departments.map((department,index) => <h1 key={index}>{department.department}</h1>)}
         </div>
         <div ref={modal} className='modal-bg'>
             <AddDepartmentModal reference={modal} token={token}/>
