@@ -14,12 +14,12 @@ const userSchema = mongoose.Schema({
     courses:[{type:mongoose.Schema.Types.ObjectId, ref:'Course'}],
     dateRegistered:[{
         course: {type:mongoose.Schema.Types.ObjectId, ref:'Course'},
-        date: {type: Date, default: Date.now()}
+        date: {type: Date, default: Date.now}
     }],
     coursesCompleted:[{type:mongoose.Schema.Types.ObjectId, ref:'Course'}],
     dateCompleted:[{
         course: {type:mongoose.Schema.Types.ObjectId, ref:'Course'},
-        date: {type: Date, default: Date.now()}
+        date: {type: Date, default: Date.now}
     }]
 },{
     timestamps:true

@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import UserNav from './UserNav'
 import CourseCard from '../CourseCard'
+import SearchBar from '../SearchBar'
 
 const CompletedCourses = () => {
     const token = localStorage.getItem("token")
@@ -25,6 +26,7 @@ const CompletedCourses = () => {
     return (
         <>
         <UserNav />
+        <SearchBar />
         <div className='dashboard-content container'>
         {courses.map(course =><Link onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${userID}/${course._id}`}>
                     <CourseCard course={course}/>

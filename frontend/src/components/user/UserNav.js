@@ -28,7 +28,7 @@ const UserNav = () => {
                 <Link className={location.pathname===`/user/all-courses/${userID}` ? 'active-link nav-item' : 'nav-item'} to={`/user/${userID}`} to={`/user/all-courses/${userID}`}>All courses</Link>    
                 <Link className={location.pathname===`/user/${userID}/completed-courses` ? 'active-link nav-item' : 'nav-item'} to={`/user/${userID}`} to={`/user/${userID}/completed-courses`}>Completed Courses</Link>   
 
-                <form class="form-inline my-1">
+                {/* <form class="form-inline my-1">
                 <div class="md-form form-sm my-0">
                 <input  class="form-control mr-sm-2" type="text" placeholder="Search"
                     aria-label="Search"
@@ -37,7 +37,7 @@ const UserNav = () => {
                 />
                 </div>
                 <button class="btn btn-outline-white btn-sm my-0" type="submit" onClick={handleClick}>Search</button>
-            </form>            
+            </form>             */}
                 
             </div>
             

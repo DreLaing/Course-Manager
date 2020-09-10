@@ -6,6 +6,7 @@ module.exports = completionTime = (req,res,next) =>{
         const registered = user.dateRegistered.filter(course => { return course._id == req.params.course})
         const completed = user.dateCompleted.filter(course =>{ return course._id == req.params.course})
         console.log(registered)
+        console.log(completed)
         
         let dateRegistered = registered[0].date.toString()
         dateRegistered.split("T")[0]

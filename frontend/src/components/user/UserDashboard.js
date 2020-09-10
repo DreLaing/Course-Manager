@@ -5,6 +5,7 @@ import './ui/UserDashboard.css'
 import CourseCard from '../CourseCard'
 import Navbar from '../Navbar'
 import UserNav from './UserNav'
+import SearchBar from '../SearchBar'
 
 const UserDashboard = () => {
     const history = useHistory()
@@ -30,6 +31,7 @@ const UserDashboard = () => {
     return (
         <>
         <UserNav />
+        <SearchBar />
         <div className='dashboard-content container'>
             {userInfo.courses.map((course, index) =><Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${id}/${course._id}`}>
                 <CourseCard course={course}/>

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import './ui/AdminCourseContent.css'
 import axios from 'axios'
 import Navbar from '.././Navbar'
 import AdminNav from './AdminNav'
 import CommentCard from '../CommentCard'
+import DeleteCourseModal from './DeleteCourseModal'
+
 
 const AdminCourseContent = () => {
+    const modal = useRef(null)
     const token = localStorage.getItem("token")
     const history = useHistory()
     const [departments, setDepartments] = useState([{
@@ -109,14 +112,6 @@ const AdminCourseContent = () => {
         window.location.reload()
     }
 
-    const deleteCourse = () =>{
-        axios.delete(`http://localhost:5000/admin/delete-course/${courseID}`)
-        .then(course =>{
-            console.log(course)
-            history.push('/admin')
-        })
-        .catch(err => console.log(err))
-    }
 
     const renderEditMode = () =>{
       return <form className='edit-mode' onSubmit={()=>makeUpdate()}>
@@ -199,7 +194,7 @@ const AdminCourseContent = () => {
              : <div>
                     <div className='button-container'>
                         <button type="button" class="btn btn-elegant" onClick={()=> setEditMode(true)}>Edit Course</button>
-                        <button type="button" class="btn btn-danger" onClick={()=> deleteCourse()}>Delete Course</button>
+                        <button type="button" class="btn btn-danger" onClick={()=>modal.current.classList.add('active')}>Delete Course</button>
                     </div>
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
                     <span className='course-content-department'>{courseInfo?.department}</span>
@@ -232,6 +227,10 @@ const AdminCourseContent = () => {
                 })}
             </div>
         </div>
+        
+            <div className='modal-bg'ref={modal}>
+                <DeleteCourseModal  reference={modal} token={token}/> 
+            </div>   
     </div>
     )
 }

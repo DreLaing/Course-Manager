@@ -51,7 +51,7 @@ router.get('/get-course/:user/:course', isRegistered, completionTime, (req,res)=
                 duration: req.duration       
             } 
             res.json(response) 
-            console.log(response)         
+            // console.log(response)         
         }
         else{
             const response = {
@@ -78,7 +78,7 @@ router.route('/add-course/:user/:course').post((req,res)=>{
         user.courses.push(req.params.course)
         user.dateRegistered.push(req.params.course)
         user.save()
-        console.log(user)
+        // console.log(user)
         res.json(user)
     })
     .catch(err => res.json(err))
