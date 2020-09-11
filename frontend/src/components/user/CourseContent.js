@@ -7,9 +7,11 @@ import CommentCard from '../CommentCard'
 import UserNav from './UserNav'
 import CheckIcon from '@material-ui/icons/Check';
 import LinkIcon from '@material-ui/icons/Link';
-import StarRateIcon from '@material-ui/icons/StarRate';
+import SearchBar from '../SearchBar'
 
-const CourseContent = (props) => {
+const CourseContent = () => {
+    const userType = JSON.parse(localStorage.getItem("userType"))
+    const email = JSON.parse(localStorage.getItem("email"))
     const token = localStorage.getItem("token")
     const history = useHistory()
     const userID = JSON.parse(localStorage.getItem("user"))
@@ -33,6 +35,7 @@ const CourseContent = (props) => {
     const submitFeedback = () =>{
         if(feedback.comment!==''){
             axios.post(`http://localhost:5000/user/feedback/${userID}/${courseID}`,{
+            user: email,
             comment: feedback.comment,
             rating: feedback.rating
         })
@@ -78,6 +81,7 @@ const CourseContent = (props) => {
     return (
         <>
         <UserNav />
+        <SearchBar userType={userType}/>
         <div className='container'>
             <div className='course-content-container'>
                 
@@ -127,16 +131,17 @@ const CourseContent = (props) => {
             
             <p>Give us feedback:</p>
             <div class="md-form feedback-container">
-            <div class="md-form amber-textarea active-amber-textarea">
+            <div class="md-form amber-textarea active-amber-textarea" style={{borderBottom:'2px black solid'}}>
                 <i class="fas fa-pencil-alt prefix"></i>
-                <textarea id="form22" class="md-textarea form-control" rows="3"
+                <textarea id="form22" class="form-control" style={{border:'none'}} rows="3"
                     value={feedback.comment} onChange={e => {
                         setFeedback({...feedback, comment:e.target.value})
                     }}>
                 </textarea>
                 <label for="form22">Leave a comment ...</label>
             </div>
-                <select class="mdb-select md-form" onChange={e => setFeedback({...feedback, rating: e.target.value})}>
+            
+                <select class="mdb-select md-form" style={{borderRadius:'5px'}} onChange={e => setFeedback({...feedback, rating: e.target.value})}>
                     <option value="" disabled selected>Course Rating</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -150,9 +155,8 @@ const CourseContent = (props) => {
                     submitFeedback()
                 }}>Submit feedback</button>
             </div>
-            
-            Comments:
             <hr/>
+            <h4 style={{fontWeight:'bold'}}>Student Feedback</h4>
             <div className='comment-section'>
                 {courseInfo.feedback.map((feedback, index) =>{
                     return <CommentCard key={index} user={feedback.user} comment={feedback.comment} rating={feedback.rating} />

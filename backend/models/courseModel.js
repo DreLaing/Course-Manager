@@ -18,7 +18,8 @@ const courseSchema = mongoose.Schema({
         link: String,
     }],
     feedback: [{
-        user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+        user: String,
+        userID: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
         comment: String,
         rating: {type: String, enum:['1','2','3','4','5'], default: '3'}
     }],

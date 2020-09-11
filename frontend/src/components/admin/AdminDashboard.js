@@ -5,8 +5,10 @@ import axios from 'axios'
 import Navbar from '../Navbar'
 import CourseCard from '../CourseCard'
 import AdminNav from './AdminNav'
+import SearchBar from '../SearchBar'
 
 const AdminDashboard = () => {
+    const userType = JSON.parse(localStorage.getItem("userType"))
     const history = useHistory()
     const [coursesInfo, setCoursesInfo] = useState([{
         coursename: '',
@@ -28,6 +30,7 @@ const AdminDashboard = () => {
     return (
         <>
         <AdminNav />
+        <SearchBar userType={userType}/>
             <div className='dashboard-content container'>
                 {coursesInfo.map((course, index) => <Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/admin/${course._id}`}>
                         <CourseCard course={course}/> </Link>)}

@@ -122,15 +122,31 @@ router.get('/completed/:user', (req, res)=>{
 router.route('/feedback/:user/:course').post((req,res)=>{
     Course.findById(req.params.course)
     .then(course =>{
-        const feedback = {
-            user: req.params.user,
-            comment: req.body.comment,
-            rating: req.body.rating
+        if(req.body.rating){
+            const feedback = {
+                user: req.body.user,
+                userID: req.params.user,
+                comment: req.body.comment,
+                rating: req.body.rating
+            }
+            course.feedback.unshift(feedback)
+            course.save()
+            console.log(course)
+            res.json(course)
         }
-        course.feedback.unshift(feedback)
-        course.save()
-        console.log(course)
-        res.json(course)
+        else{
+            const feedback = {
+                user: req.body.user,
+                userID: req.params.user,
+                comment: req.body.comment
+            }
+            course.feedback.unshift(feedback)
+            course.save()
+            console.log(course)
+            res.json(course)
+        }
+        
+        
     })
     .catch(err => {
         res.json(err)
@@ -140,7 +156,7 @@ router.route('/feedback/:user/:course').post((req,res)=>{
 
 // ----SEARCH FOR COURSE----
 router.route('/find/:searchValue').get((req,res)=>{
-    Course.find({$or: [{coursename: req.params.searchValue}, {skills: req.params.searchValue}]})
+    Course.find({$or: [{coursename: {"$regex":req.params.searchValue, "$options": 'i'}}, {skills: {"$regex": req.params.searchValue, "$options": 'i'}}]}).populate("department")
     .then(course => res.json(course))
     .catch(err => res.json(`Cannot find course`))
 })

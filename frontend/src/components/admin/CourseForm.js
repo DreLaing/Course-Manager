@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import './ui/CourseForm.css'
 import AdminNav from './AdminNav'
-import Navbar from '.././Navbar'
 
 const CourseForm = () => {
     const history = useHistory()

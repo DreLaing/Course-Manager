@@ -44,6 +44,10 @@ function App() {
             <UserDashboard />
             <Footer />
           </Route>
+          <Route path='/admin/search/:searchValue' exact={true}>
+            <SearchResult />
+            <Footer />
+          </Route>
           <Route path='/admin' exact={true}>
             <AdminDashboard />
             <Footer />

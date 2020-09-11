@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
     const history = useHistory()
     const [search, setSearch] = useState()
 
     const handleSearch = () =>{
-        history.push(`/user/search/${search}`)
+        history.push(`/${props.userType}/search/${search}`)
         setSearch('') 
     }
 
@@ -17,7 +17,8 @@ const SearchBar = () => {
             <input class="form-control" id="inputEmail3" placeholder="Search Courses and Skills..." style={{
                 margin: '2rem 0rem 2rem 0rem',
                 height: '50px',
-                textIndent: '30px'
+                textIndent: '30px',
+                borderRadius:'10px'
                 }}
                 value={search}
                 onChange={e => setSearch(e.target.value)}>

@@ -8,6 +8,7 @@ import UserNav from './UserNav'
 import SearchBar from '../SearchBar'
 
 const UserDashboard = () => {
+    const userType = JSON.parse(localStorage.getItem("userType"))
     const history = useHistory()
     const token = localStorage.getItem("token")
     const { id } = useParams()
@@ -31,7 +32,7 @@ const UserDashboard = () => {
     return (
         <>
         <UserNav />
-        <SearchBar />
+        <SearchBar userType={userType}/>
         <div className='dashboard-content container'>
             {userInfo.courses.map((course, index) =><Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${id}/${course._id}`}>
                 <CourseCard course={course}/>

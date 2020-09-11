@@ -72,6 +72,13 @@ router.get('/get-course/:course', (req,res)=>{
     .catch(err => res.json(err))
 })
 
+// SEARCH FOR COURSE
+router.route('/find/:searchValue').get((req,res)=>{
+    Course.find({$or: [{coursename: {"$regex":req.params.searchValue, "$options": 'i'}}, {skills: {"$regex": req.params.searchValue, "$options": 'i'}}]}).populate("department")
+    .then(course => res.json(course))
+    .catch(err => res.json(`Cannot find course`))
+})
+
 // ----CREATES NEW COURSE----
 router.route('/create-course').post((req,res)=>{
     const coursename = req.body.coursename

@@ -32,11 +32,14 @@ const LoginForm = (props) => {
 
                 if(decoded.userType==='Employee'){
                     localStorage.setItem("user", JSON.stringify(decoded._id))
+                    localStorage.setItem("userType", JSON.stringify("user"))
                     
                     history.push(`/user/${decoded._id}`)
                 }
                 else if(decoded.userType==='Admin'){
                     history.push(`/admin`)
+
+                    localStorage.setItem("userType", JSON.stringify("admin"))
                 }
             }
             // ----NOT WORKING AS IT SHOULD SINCE ADDING JWT----

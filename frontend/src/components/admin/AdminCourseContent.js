@@ -6,10 +6,12 @@ import Navbar from '.././Navbar'
 import AdminNav from './AdminNav'
 import CommentCard from '../CommentCard'
 import DeleteCourseModal from './DeleteCourseModal'
+import SearchBar from '../SearchBar'
 
 
 const AdminCourseContent = () => {
     const modal = useRef(null)
+    const userType = JSON.parse(localStorage.getItem("userType"))
     const token = localStorage.getItem("token")
     const history = useHistory()
     const [departments, setDepartments] = useState([{
@@ -189,11 +191,12 @@ const AdminCourseContent = () => {
     return (
         <div>
             <AdminNav />
+            <SearchBar userType={userType}/>
             <div className='container course-content-container'>
             {editMode===true ? renderEditMode()
              : <div>
                     <div className='button-container'>
-                        <button type="button" class="btn btn-elegant" onClick={()=> setEditMode(true)}>Edit Course</button>
+                        <button type="button" class="btn btn-light" style={{border:'black 1px solid'}} onClick={()=> setEditMode(true)}>Edit Course</button>
                         <button type="button" class="btn btn-danger" onClick={()=>modal.current.classList.add('active')}>Delete Course</button>
                     </div>
                     <h1 className='course-content-title'>{courseInfo.coursename}</h1>
@@ -220,7 +223,9 @@ const AdminCourseContent = () => {
                             </div>
                         </div>
                 </div>}
-
+                
+                <hr/>
+                <h4 style={{fontWeight:'bold'}}>Student Feedback</h4>
                 <div className='comment-section'>
                 {courseInfo.feedback.map((feedback, index) =>{
                     return <CommentCard key={index} user={feedback.user} comment={feedback.comment} rating={feedback.rating} />

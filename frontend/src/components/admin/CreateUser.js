@@ -56,7 +56,7 @@ const CreateUser = () => {
                     </select>
 
                     {/* <!-- Create user button --> */}
-                    <button class="btn btn-info btn-block" type="submit" style={{marginLeft:'5px'}} onClick={()=>submitUser()}>Create User</button>
+                    <button class="btn btn-indigo" type="submit" style={{marginLeft:'5px'}} onClick={()=>submitUser()}>Create User</button>
 
 
                 </form>

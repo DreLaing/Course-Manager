@@ -4,8 +4,11 @@ import axios from 'axios'
 import CourseCard from './CourseCard'
 import Navbar from './Navbar'
 import UserNav from './user/UserNav'
+import AdminNav from './admin/AdminNav'
+import SearchBar from './SearchBar'
 
 const SearchResult = () => {
+    const userType= JSON.parse(localStorage.getItem("userType"))
     const token = localStorage.getItem("token")
     const history = useHistory()
     const userID = JSON.parse(localStorage.getItem("user"))
@@ -14,17 +17,19 @@ const SearchResult = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`http://localhost:5000/user/find/${searchValue}`)
+        axios.get(`http://localhost:5000/${userType}/find/${searchValue}`)
         .then(res => {
             setSearchResults(res.data)
             console.log(res.data)
         })
-        .catch(err => history.push('/'))
+        .catch(err => console.log(err))
     }, [])
 
     return (
-        <div>
+        <>
+        {userType === 'user' ? <div>
             <UserNav />
+            <SearchBar userType={userType}/>
             <div className='dashboard-content container'>
                 {searchResults.length===0 ? <h3>No Results Found </h3> : searchResults.map((course, index) => {
                     return <Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/user/${userID}/${course._id}`}>
@@ -33,6 +38,16 @@ const SearchResult = () => {
                 })}
             </div>
         </div>
+        :
+        <div>
+            <AdminNav />
+            <SearchBar userType={userType}/>
+            <div className='dashboard-content container'>
+                {searchResults.length===0 ? <h3>No Results Found </h3> : searchResults.map((course, index) => <Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/admin/${course._id}`}>
+                        <CourseCard course={course}/> </Link>)}
+            </div>
+        </div>}
+        </>
     )
 }
 
