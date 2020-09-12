@@ -3,7 +3,9 @@ import axios from 'axios'
 import CloseIcon from '@material-ui/icons/Close'
 
 const AddDepartmentModal = (props) => {
-    const [department, setDepartment] = useState()
+    const [disabled, setDisabled] = useState(true)
+    const [department, setDepartment] = useState('')
+    
     axios.defaults.headers.common = {'Authorization': `Bearer ${props.token}`}
     const addDepartment = () =>{
         axios.post(`http://localhost:5000/admin/new-department`, {
@@ -15,6 +17,16 @@ const AddDepartmentModal = (props) => {
         })
         .catch(err => console.log(err))
     }
+
+    const enable = () =>{
+        if(department.length < 2){
+            setDisabled(true)
+        }
+        else{
+            setDisabled(false)
+        }
+    }
+
     return (
         <div class='login-form modal'>
             <form class="text-center" action="#!">
@@ -26,12 +38,15 @@ const AddDepartmentModal = (props) => {
                     {/* <i className={invalidEmail===true ? 'fas fa-user prefix invalid' : 'fas fa-user prefix'}></i> */}
                     <input type="email" id="inputValidationEx1" class="form-control"
                         value={department} 
-                        onChange={e => setDepartment(e.target.value)}                     
+                        onChange={e => {
+                            setDepartment(e.target.value)
+                            enable()
+                        }}                     
                     />
-                    <label for="inputValidationEx1" data-error="wrong" data-success="right">Department Name</label>
+                    <label htmlFor="inputValidationEx1" data-error="wrong" data-success="right">Department Name</label>
                 </div>  
 
-                <button class="btn btn-info btn-block my-4" type="submit" onClick={()=>addDepartment()}>Add Department</button>
+                <button class="btn btn-indigo" disabled={disabled} type="submit" onClick={()=>addDepartment()}>Add Department</button>
             </form>
   </div>
     )

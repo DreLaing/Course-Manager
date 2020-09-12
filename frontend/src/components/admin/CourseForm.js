@@ -7,8 +7,9 @@ import AdminNav from './AdminNav'
 const CourseForm = () => {
     const history = useHistory()
     const token = localStorage.getItem("token")
-    const [coursename, setCoursename] = useState()
-    const [department, setDepartment] = useState()
+    const [disabled, setDisabled] = useState(true)
+    const [coursename, setCoursename] = useState('')
+    const [department, setDepartment] = useState('')
     const [departments, setDepartments] = useState([{
         _id: '',
         department: ''
@@ -45,6 +46,17 @@ const CourseForm = () => {
             history.push('/admin')
         })
         .catch(err => history.push('/'))
+    }
+
+    const enable = () =>{
+        if(coursename.length > 2){
+            if(department.length > 2){
+                setDisabled(false)
+            }
+        }
+        else{
+            setDisabled(true)
+        }
     }
 
     const handleResourceChange = (e, index) =>{
@@ -87,19 +99,25 @@ const CourseForm = () => {
         <div>
             <AdminNav />
             <form className='form-container container'>
-                <h1>Create Course</h1>
+                <h1 style={{fontWeight:'500'}}>Create Course</h1>
 
                 {/* ----COURSE TITLE---- */}
                 <div class="md-form form-lg form-course-title">
                     <input type="text" id="inputLGEx" class="form-control form-control-lg"
                         value={coursename}
-                        onChange={e => setCoursename(e.target.value)}
+                        onChange={e =>{
+                            setCoursename(e.target.value)
+                            enable()
+                        }}
                     />
-                    <label for="inputLGEx">Course Title</label>
+                    <label htmlFor="inputLGEx">Course Title</label>
                 </div>
 
                 {/* ----SELECT DEPARTMENT---- */}
-                <select defaultValue={departments[0]._id} class="browser-default custom-select" onChange={e => setDepartment(e.target.value)}>
+                <select defaultValue={departments[0]._id} class="browser-default custom-select" onChange={e => {
+                    setDepartment(e.target.value)
+                    enable()
+                }}>
                 <option>Select Department</option>
                     {departments.map((department, index) =>{
                         return <option key={index} value={department._id}>{department.department}</option>
@@ -155,7 +173,7 @@ const CourseForm = () => {
                     </div>
                     
                 </div>
-                <button type="button" class="btn btn-indigo" onClick={()=>submitCourse()}>Submit course information</button>
+                <button type="button" disabled={disabled} class="btn btn-indigo" onClick={()=>submitCourse()}>Submit course information</button>
                 
             </form>
             

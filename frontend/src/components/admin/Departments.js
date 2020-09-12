@@ -27,23 +27,29 @@ const Departments = () => {
     return (
         <>
         <AdminNav />
-        <div className='container text-center' style={{
-            width: '500px',
-            position: 'relative',
-            left:'35%',
-            top: '50px',
-            backgroundColor: 'white',
-            padding: '30px',
-            borderRadius: '7px',
-            marginBottom: '6rem'
-        }}>
-        <button type="button" class="btn btn-indigo"
-            onClick={() =>{ 
-                modal.current.classList.add('active');}}>
-            Create new Department <i class="fa fa-plus" aria-hidden="true"></i>
-        </button>
-            {departments.map((department,index) => <h1 key={index}>{department.department}</h1>)}
-        </div>
+        <div className='container'>
+            <h1 style={{fontWeight:'500', marginTop:'20px'}}>List of Departments</h1>
+            <hr style={{borderTop: '1px solid rgb(233, 111, 41)'}}/>
+            <button type="button" class="btn btn-deep-orange"
+                onClick={() =>{ 
+                    modal.current.classList.add('active');}}>
+                Create new Department <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+            <div style={{
+                display:'grid',
+                gridTemplateColumns: '50% 50%',
+                marginBottom: '4rem'
+            }}>
+                {departments.map((department,index) => <h1 style={{
+                    fontWeight:'600', margin:'2rem', 
+                    whiteSpace:'nowrap',
+                    backgroundColor: 'white',
+                    padding: '15px',
+                    borderRadius:'5px',
+                    color:' rgb(0, 46, 65)'
+                    }} key={index}>{department.department}</h1>)}
+            </div>
+       </div>
         <div ref={modal} className='modal-bg'>
             <AddDepartmentModal reference={modal} token={token}/>
         </div>

@@ -16,10 +16,22 @@ const CourseContent = () => {
     const history = useHistory()
     const userID = JSON.parse(localStorage.getItem("user"))
     const courseID = JSON.parse(localStorage.getItem("course"))
+    const [disabled, setDisabled] = useState(true)
     const [feedback, setFeedback] = useState({
         comment: '',
         rating: ''
     })
+
+    const enable = () =>{
+        if(feedback.comment.length >= 2){
+            setDisabled(false)
+            console.log(feedback.comment.length)
+        }
+        else if(feedback.comment.length < 2){
+            setDisabled(true)
+            console.log(feedback.comment.length)
+        }
+    }
 
     const [courseInfo, setCourseInfo] = useState({
         coursename: '',
@@ -136,6 +148,7 @@ const CourseContent = () => {
                 <textarea id="form22" class="form-control" style={{border:'none'}} rows="3"
                     value={feedback.comment} onChange={e => {
                         setFeedback({...feedback, comment:e.target.value})
+                        enable()
                     }}>
                 </textarea>
                 <label for="form22">Leave a comment ...</label>
@@ -149,7 +162,7 @@ const CourseContent = () => {
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <button type="submit" class="btn btn-deep-orange" onClick={()=> {
+                <button type="submit" class="btn btn-deep-orange" disabled={disabled} onClick={()=> {
                     console.log(feedback)
                     setFeedback({comment:'', rating:''})
                     submitFeedback()

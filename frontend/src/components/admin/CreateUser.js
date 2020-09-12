@@ -4,6 +4,7 @@ import AdminNav from './AdminNav'
 
 const CreateUser = () => {
     const token = localStorage.getItem("token")
+    const [disabled, setDisabled] = useState(true)
     const [newUser, setNewUser] = useState({
         email: '',
         password:'',
@@ -18,6 +19,22 @@ const CreateUser = () => {
             userType: newUser.userType
         })
     }
+
+    const emailRegex = /\S+@\S+\.\S+/
+
+    const enable = () =>{
+        if(emailRegex.test(newUser.email)===false || newUser.password.length < 5){
+            setDisabled(true)
+            console.log(emailRegex.test(newUser.email))
+            console.log(newUser.password.length)
+        }
+        else{
+            setDisabled(false)
+            console.log(emailRegex.test(newUser.email))
+            console.log(newUser.password.length)
+        }
+    }
+
     return (
         <>
         <AdminNav />
@@ -27,7 +44,7 @@ const CreateUser = () => {
                  backgroundColor:'white', 
                  position: 'relative', 
                  left: '35%',
-                 top:'50px',
+                 top:'30px',
                  padding: '30px',
                  borderRadius: '7px',
                  marginBottom:'5rem'}}>
@@ -39,13 +56,19 @@ const CreateUser = () => {
                     {/* <!-- Email --> */}
                     <input type="email" id="defaultSubscriptionFormEmail" class="form-control mb-4" placeholder="E-mail" 
                         value={newUser.email}
-                        onChange={e => setNewUser({...newUser, email: e.target.value})}
+                        onChange={e => {
+                            setNewUser({...newUser, email: e.target.value})
+                            enable()
+                        }}
                     />
 
                     {/* Password */}
-                    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password"
+                    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password must be atleast 6 characters"
                         value={newUser.password}
-                        onChange={e => setNewUser({...newUser, password: e.target.value})}
+                        onChange={e => {
+                            setNewUser({...newUser, password: e.target.value})
+                            enable()
+                        }}
                     />
 
                     <select placeholder='Select User Type' class="browser-default custom-select"
@@ -56,7 +79,7 @@ const CreateUser = () => {
                     </select>
 
                     {/* <!-- Create user button --> */}
-                    <button class="btn btn-indigo" type="submit" style={{marginLeft:'5px'}} onClick={()=>submitUser()}>Create User</button>
+                    <button class="btn btn-indigo" disabled={disabled} type="submit" style={{marginLeft:'5px'}} onClick={()=>submitUser()}>Create User</button>
 
 
                 </form>

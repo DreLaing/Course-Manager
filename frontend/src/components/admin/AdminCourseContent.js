@@ -214,11 +214,11 @@ const AdminCourseContent = () => {
                             <div>
                                 <h4 className='skills-text'>Skills <i class="fa fa-cogs" aria-hidden="true"></i></h4>
                                 <hr/>
-                                {courseInfo.skills.map(skill => {
-                                return <>
+                                {courseInfo.skills.map((skill,index) => {
+                                return <div key={index}>
                                         <h4>{skill}</h4>
                                         <hr/>
-                                    </>
+                                    </div>
                                 })}
                             </div>
                         </div>
