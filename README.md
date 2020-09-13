@@ -36,35 +36,35 @@ The company has decided to build its own course management system to provide the
 ### Requirements
 - The users must be able to log in using their email address.
 
-![](./screenshots/login.png)
+<!-- ![](./screenshots/login.png) -->
 
 - The user must be able to leave comments and a new rating
 on the course.
 
-![](./screenshots/feedback.png)
+<!-- ![](./screenshots/feedback.png) -->
 
 
 - The user must be able to click an external link to the course.
-![](./screenshots/external-link.png)
+<!-- ![](./screenshots/external-link.png) -->
 
 - The user should be able to search for courses by the key skills
 taught in the course and the course name.
 
-![](./screenshots/search-results.png)
+<!-- ![](./screenshots/search-results.png) -->
 
 - The user should be able to mark a course as finished, with
 details on how long the course duration was.
 
-![](./screenshots/duration.png)
+<!-- ![](./screenshots/duration.png) -->
 
 - The administrator should be able to manually add more
 departments and courses.
-![](./screenshots/new-course.png)
+<!-- ![](./screenshots/new-course.png) -->
 
 
 - The system must have API access to the list of courses for all
 CRUD operations.
-![](./screenshots/crud.png)
+<!-- ![](./screenshots/crud.png) -->
 
 [Back To The Top](#read-me-template)
 
