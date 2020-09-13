@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 // require('dotenv').config()
-const path = require('path');
+// const path = require('path');
 const checkAuth = require('./middleware/check-auth')
 const checkAdminAuth = require('./middleware/check-admin-auth')
 
