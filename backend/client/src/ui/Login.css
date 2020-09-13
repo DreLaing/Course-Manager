@@ -1,0 +1,56 @@
+.login-container{
+    background-image: url('../images/landing-page-bg-.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-study-image{
+    height: 600px;
+    width: 600px;
+}
+
+.login-text-container{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    flex-basis: 30%;
+}
+.login-text-container > h1{
+    color: black;
+    font-weight: 400;
+}
+.login-text-container > p{
+    color: black;
+}
+
+.logo-container{
+    display: flex;
+    position: relative;
+    margin-left: -15px;
+    align-items: center;
+}
+
+.logo-container > strong{
+    color: black;
+    font-size: 40px;
+    margin-left: -15px;
+}
+
+.adtelligent-logo{
+    height: 90px;
+    width: 90px;
+    margin: 0;
+    padding: 0;
+}
+
+.login-button-container{
+    width: 100%;
+}
+.login-button-container > button{
+    position: relative;
+}

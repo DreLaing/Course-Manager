@@ -1,0 +1,67 @@
+.form-container{
+    position: relative;
+    top: 30px;
+    width: 800px;
+    padding: 50px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-bottom: 6rem;
+}
+
+.resource-skill-container{
+    display:flex;
+    justify-content: space-between;
+}
+
+.resource-column{
+    display:flex;
+    flex-direction: column;
+    margin-top: -20px;
+}
+
+.skill-column{
+    display:flex;
+    flex-direction: column;
+}
+
+.resource-container{
+    display: flex;
+    align-items: center;
+}
+
+.resource-container > div{
+    padding: 20px;
+}
+
+.skills-container{
+    display: flex;
+    align-items: center;
+}
+
+.input-container{
+    display:flex;
+    align-items: center;
+}
+
+.input-container > i{
+    padding: 10px;
+}
+
+.form-plus-icon{
+    margin: 1rem;
+    padding: 5px;
+}
+
+.form-plus-icon:hover{
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.form-minus-icon{
+    padding: 5px;
+}
+
+.form-minus-icon:hover{
+    background-color: gray;
+    border-radius: 5px;
+}
