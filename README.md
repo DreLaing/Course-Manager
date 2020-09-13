@@ -1,68 +1,118 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Adtelligent Course Manager Prototype
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### Table of Contents
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Description](#description)
+- [Requirements](#requirements)
+- [License](#license)
+- [Author Info](#author-info)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## Description
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Problem
+When joining Adtelligent, there are a set of required courses for
+each new team member based on their department. However, these
+courses are located on sites all over the internet, on E-Learning
+websites ( e.g. Codecademy ), and other platforms such as Youtube.Because of this, it can be an issue to locate the right course just by
+name for the new team members. Also, they can’t benefit from
+knowing what they will learn, because there is no central location for
+comments on the course.
 
-### `npm run build`
+#### Solution
+The company has decided to build its own course management system to provide their team members with a central place to find these courses, specific to their department. This project is a prototype of the proposed solution, and therefore does not have all the features of the final product.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Technologies
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- ReactJS
+- NodeJS (ExpressJS)
+- MongoDB
+- MDBootstrap
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Requirements
+- The users must be able to log in using their email address.
 
-### `npm run eject`
+<!-- ![](./screenshots/login.png) -->
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- The user must be able to leave comments and a new rating
+on the course.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!-- ![](./screenshots/feedback.png) -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- The user must be able to click an external link to the course.
+<!-- ![](./screenshots/external-link.png) -->
 
-## Learn More
+- The user should be able to search for courses by the key skills
+taught in the course and the course name.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<!-- ![](./screenshots/search-results.png) -->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The user should be able to mark a course as finished, with
+details on how long the course duration was.
 
-### Code Splitting
+<!-- ![](./screenshots/duration.png) -->
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- The administrator should be able to manually add more
+departments and courses.
+<!-- ![](./screenshots/new-course.png) -->
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- The system must have API access to the list of courses for all
+CRUD operations.
+<!-- ![](./screenshots/crud.png) -->
 
-### Making a Progressive Web App
+[Back To The Top](#read-me-template)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+---
 
-### Advanced Configuration
+## Design Decisions
+- Only the Administrator is able to create a new user. This is to prevent persons from accessing the application without being an Adtelligent employee.
+- Administrators and employees login through the same portal. Ideally, the admin section should be completely separated from other users. However, for simplicity, I decided to have one login portal and to protect different API routes by using different JSON web tokens for authentication.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+## Limitations
+- Currently, the administrator is unable to edit department information.
+- Not responsive.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+[Back To The Top](#read-me-template)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## License
+
+MIT License
+
+Copyright (c) [2020] [Andre' Laing]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+[Back To The Top](#read-me-template)
+
+---
+
+## Author Info
+
+- Email - drelaing876@gmail.com
+
+[Back To The Top](#read-me-template)
