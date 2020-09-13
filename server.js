@@ -9,20 +9,19 @@ const checkAdminAuth = require('./middleware/check-admin-auth')
 
 if (process.env.NODE_ENV !== 'production'){ 
     require('dotenv').config()
+    app.get('*', (request, response) => {
+        response.sendFile(path.join(__dirname, '/client/build/index.html'));
+    });
  }
 
 const app = express()
 const port = process.env.PORT || 5000;
 const uri = process.env.DATABASE_URI;
 
-app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
-
 // ----PARSE REQUEST BODY INTO JSON----
 app.use(bodyParser.json())
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:false}))
 app.use(cors())
 
 // ----ROUTES----
@@ -41,7 +40,7 @@ if(process.env.NODE_ENV === 'production'){
 
 
 // ----DATABASE CONNECTION----
-mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,})
+mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
 const connection = mongoose.connection;
 connection.once('open', ()=>{
     console.log(`CONNECTED TO DATABASE`)
