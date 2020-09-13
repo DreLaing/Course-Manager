@@ -9,7 +9,8 @@
 /coverage
 
 # production
-
+/build
+/public/favicon.ico
 
 # misc
 .DS_Store
