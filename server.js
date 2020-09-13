@@ -9,6 +9,10 @@ const checkAdminAuth = require('./middleware/check-admin-auth')
 if (process.env.NODE_ENV !== 'production'){ 
     require('dotenv').config()
  }
+ app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 const app = express()
 const port = process.env.PORT || 5000;
 const uri = process.env.DATABASE_URI;
@@ -32,10 +36,6 @@ app.use('/login', login)
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static("client/build"));
 }
-app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
 
 
 // ----DATABASE CONNECTION----
