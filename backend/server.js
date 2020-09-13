@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
-const checkAuth = require('./validation/check-auth')
-const checkAdminAuth = require('./validation/check-admin-auth')
+const checkAuth = require('./middleware/check-auth')
+const checkAdminAuth = require('./middleware/check-admin-auth')
 
 const app = express()
 const port = process.env.PORT || 5000;
@@ -24,6 +24,11 @@ const admin = require('./routes/admin')
 app.use('/admin', checkAdminAuth, admin)
 const login = require('./routes/login')
 app.use('/login', login)
+
+// PRODUCTION
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static("client/build"));
+}
 
 // ----DATABASE CONNECTION----
 mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,})

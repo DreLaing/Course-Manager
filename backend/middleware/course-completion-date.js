@@ -10,11 +10,9 @@ module.exports = completionTime = (req,res,next) =>{
         
         let dateRegistered = registered[0].date.toString()
         dateRegistered.split("T")[0]
-        // console.log(dateRegistered)
 
         let dateCompleted = completed[0].date.toString()
         dateCompleted.split("T")[0]
-        // console.log(Math.abs(new Date(dateCompleted) - new Date(dateRegistered))/(1000 * 60 * 60))
         var completion = (Math.abs(new Date(dateCompleted) - new Date(dateRegistered))/(1000 * 60 * 60 * 24))
 
          if(completion < 0.01){           

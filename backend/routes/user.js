@@ -2,10 +2,10 @@ const router = require('express').Router()
 const User = require('../models/userModel')
 const Course = require('../models/courseModel')
 const Department = require('../models/departmentModel')
-const isRegistered = require('../validation/isRegisteredForCourse')
+const isRegistered = require('../middleware/isRegisteredForCourse')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const completionTime = require('../validation/course-completion-date')
+const completionTime = require('../middleware/course-completion-date')
 
 
 
@@ -66,7 +66,6 @@ router.get('/get-course/:user/:course', isRegistered, completionTime, (req,res)=
             res.json(response)
         }
         
-        // console.log(`----RESPONSE---- ${response}`)
     })
     .catch(err => res.json(err))
 })
@@ -78,7 +77,6 @@ router.route('/add-course/:user/:course').post((req,res)=>{
         user.courses.push(req.params.course)
         user.dateRegistered.push(req.params.course)
         user.save()
-        // console.log(user)
         res.json(user)
     })
     .catch(err => res.json(err))
@@ -113,7 +111,6 @@ router.get('/completed/:user', (req, res)=>{
     })
     .then(user =>{
         res.json(user.coursesCompleted)
-        // console.log(user)
     })
     .catch(err => res.json(err))
 })
@@ -185,7 +182,6 @@ router.route('/login').post((req,res)=>{
     User.find({email: email, userType:'Employee'})
     .then(queryUser => {
         if(queryUser.length!==0){
-            // console.log(queryUser)
             user = queryUser
                 bcrypt.compare(req.body.password, user[0].password, (err, isMatch) =>{
                     if(!isMatch){
