@@ -37,7 +37,7 @@ app.use('/admin', checkAdminAuth, admin);
 const login = require('./routes/login');
 app.use('/login', login);
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
     res.sendFile('index.html', { root });
 })
 
