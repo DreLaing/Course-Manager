@@ -21,13 +21,6 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
 
-// PRODUCTION
-
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(root));
-    
-}
-
 // ----ROUTES----
 
 const user = require('./routes/user');
@@ -37,9 +30,13 @@ app.use('/admin', checkAdminAuth, admin);
 const login = require('./routes/login');
 app.use('/login', login);
 
-app.get("*", (req, res) => {
-    res.sendFile('index.html', { root });
-})
+// PRODUCTION
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(root));
+    app.get("/", (req, res) => {
+        res.sendFile('index.html', { root });
+    })
+}
 
 
 // ----DATABASE CONNECTION----
