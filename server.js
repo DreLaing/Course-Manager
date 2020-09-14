@@ -20,16 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
-
-// ----ROUTES----
-
-const user = require('./routes/user');
-app.use('/user', checkAuth, user);
-const admin = require('./routes/admin');
-app.use('/admin', checkAdminAuth, admin);
-const login = require('./routes/login');
-app.use('/login', login);
-
 // PRODUCTION
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(root));
@@ -37,6 +27,15 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile('index.html', { root });
     })
 }
+
+
+// ----ROUTES----
+const user = require('./routes/user');
+app.use('/user', checkAuth, user);
+const admin = require('./routes/admin');
+app.use('/admin', checkAdminAuth, admin);
+const login = require('./routes/login');
+app.use('/login', login);
 
 
 // ----DATABASE CONNECTION----
