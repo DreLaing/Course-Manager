@@ -17,7 +17,7 @@ const LoginForm = (props) => {
         e.preventDefault()
         const source = axios.CancelToken.source()
         if(props.clicked==='Sign In'){
-            axios.post('/login/',{
+            axios.post('http://localhost:5000/login/',{
             email,
             password
         }, {cancelToken: source.token} )
