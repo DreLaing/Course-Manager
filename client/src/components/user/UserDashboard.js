@@ -15,10 +15,14 @@ const UserDashboard = () => {
         email: '',
         courses: []
     })
-    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    // axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     useEffect(()=>{
-        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`/user/${JSON.parse(localStorage.getItem("user"))}`)
+        // axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+        axios.get(`/user/${JSON.parse(localStorage.getItem("user"))}`, {
+            headers: {
+                'Authorization': `token ${token}`
+              }
+        })
         .then(res => {
             console.log(res.data)
             setUserInfo({
