@@ -19,9 +19,7 @@ const UserDashboard = () => {
     useEffect(()=>{
         // axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`/user/${JSON.parse(localStorage.getItem("user"))}`, {
-            headers: {
-                'Authorization': `token ${token}`
-              }
+            authorization: token
         })
         .then(res => {
             console.log(res.data)
