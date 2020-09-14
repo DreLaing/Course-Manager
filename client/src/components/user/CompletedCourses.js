@@ -17,7 +17,7 @@ const CompletedCourses = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`http://localhost:5000/user/completed/${userID}`)
+        axios.get(`/user/completed/${userID}`)
         .then(courses =>{
             setCourses(courses.data)
             console.log(courses.data)

@@ -13,7 +13,7 @@ const CreateUser = () => {
 
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     const submitUser = () =>{
-        axios.post(`http://localhost:5000/admin/new-user`,{
+        axios.post(`/admin/new-user`,{
             email: newUser.email,
             password: newUser.password,
             userType: newUser.userType

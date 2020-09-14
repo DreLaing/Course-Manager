@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`http://localhost:5000/admin/get-courses`)
+        axios.get(`/admin/get-courses`)
         .then(courses => {
             console.log(courses.data)
             setCoursesInfo(courses.data)

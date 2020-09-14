@@ -16,7 +16,7 @@ const SearchResult = () => {
 
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     useEffect(()=>{
-        axios.get(`http://localhost:5000/${userType}/find/${searchValue}`)
+        axios.get(`/${userType}/find/${searchValue}`)
         .then(res => {
             setSearchResults(res.data)
             console.log(res.data)

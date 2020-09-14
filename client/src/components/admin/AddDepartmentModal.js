@@ -8,7 +8,7 @@ const AddDepartmentModal = (props) => {
     
     axios.defaults.headers.common = {'Authorization': `Bearer ${props.token}`}
     const addDepartment = () =>{
-        axios.post(`http://localhost:5000/admin/new-department`, {
+        axios.post(`/admin/new-department`, {
             department
         })
         .then(()=>{

@@ -22,7 +22,7 @@ const CourseForm = () => {
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/admin/get-departments`)
+        axios.get(`/admin/get-departments`)
         .then(departments => {
             console.log(departments.data)
             setDepartments(departments.data)
@@ -32,7 +32,7 @@ const CourseForm = () => {
     }, [])
 
     const submitCourse = () =>{
-        axios.post(`http://localhost:5000/admin/create-course`, {
+        axios.post(`/admin/create-course`, {
             coursename,
             department,
             skills,

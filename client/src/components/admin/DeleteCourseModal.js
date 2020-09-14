@@ -10,7 +10,7 @@ const DeleteCourseModal = (props) => {
     axios.defaults.headers.common = {'Authorization': `Bearer ${props.token}`}
 
     const deleteCourse = () =>{
-        axios.delete(`http://localhost:5000/admin/delete-course/${courseID}`)
+        axios.delete(`/admin/delete-course/${courseID}`)
         .then(course =>{
             console.log(course)
             history.push('/admin')

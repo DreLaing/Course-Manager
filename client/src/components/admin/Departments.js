@@ -16,7 +16,7 @@ const Departments = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`http://localhost:5000/admin/get-departments`)
+        axios.get(`/admin/get-departments`)
         .then(departments => {
             console.log(departments.data)
             setDepartments(departments.data)
