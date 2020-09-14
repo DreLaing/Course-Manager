@@ -14,6 +14,11 @@ if (process.env.NODE_ENV !== 'production'){
 const app = express();
 const port = process.env.PORT || 5000;
 const uri = process.env.DATABASE_URI;
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cors());
+
 
 // PRODUCTION
 if(process.env.NODE_ENV === 'production'){
@@ -22,12 +27,6 @@ if(process.env.NODE_ENV === 'production'){
         response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 }
-
-// ----PARSE REQUEST BODY INTO JSON----
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(cors());
 
 // ----ROUTES----
 
