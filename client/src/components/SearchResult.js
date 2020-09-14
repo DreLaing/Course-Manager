@@ -14,8 +14,8 @@ const SearchResult = () => {
     const { searchValue } = useParams()
     const [searchResults, setSearchResults] = useState([])
 
-    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     useEffect(()=>{
+        axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
         axios.get(`/${userType}/find/${searchValue}`)
         .then(res => {
             setSearchResults(res.data)
