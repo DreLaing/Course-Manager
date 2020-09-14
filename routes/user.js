@@ -159,7 +159,7 @@ router.route('/find/:searchValue').get((req,res)=>{
 })
 
 // ----GET USER INFORMATION----
-router.route('/:id').post((req,res)=>{
+router.route('/:id').get((req,res)=>{
     User.find({"_id": req.params.id}).populate({
         path: 'courses',
         populate:{
