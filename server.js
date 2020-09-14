@@ -7,15 +7,21 @@ const path = require('path');
 const checkAuth = require('./middleware/check-auth')
 const checkAdminAuth = require('./middleware/check-admin-auth')
 
-const app = express()
-
 if (process.env.NODE_ENV !== 'production'){ 
     require('dotenv').config()
  }
 
-
+const app = express()
 const port = process.env.PORT || 5000;
 const uri = process.env.DATABASE_URI;
+
+// PRODUCTION
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static("client/build"));
+    app.get('*', (request, response) => {
+        response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+}
 
 // ----PARSE REQUEST BODY INTO JSON----
 app.use(bodyParser.json())
@@ -32,17 +38,11 @@ app.use('/admin', checkAdminAuth, admin)
 const login = require('./routes/login')
 app.use('/login', login)
 
-// PRODUCTION
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static("client/build"));
-    app.get('*', (request, response) => {
-        response.sendFile(path.join(__dirname, '/client/build/index.html'));
-    });
-}
+
 
 
 // ----DATABASE CONNECTION----
-mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
+mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,})
 const connection = mongoose.connection;
 connection.once('open', ()=>{
     console.log(`CONNECTED TO DATABASE`)
