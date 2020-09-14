@@ -26,7 +26,7 @@ if(process.env.NODE_ENV === 'production'){
 // ----PARSE REQUEST BODY INTO JSON----
 app.use(bodyParser.json())
 app.use(express.json());
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 // ----ROUTES----
