@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
  }
 
-const app = express()
+const app = express();
 const port = process.env.PORT || 5000;
 const uri = process.env.DATABASE_URI;
 
@@ -24,31 +24,31 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 // ----PARSE REQUEST BODY INTO JSON----
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
-app.use(cors())
+app.use(express.urlencoded({extended:true}));
+app.use(cors());
 
 // ----ROUTES----
 
-const user = require('./routes/user')
-app.use('/user', checkAuth, user)
-const admin = require('./routes/admin')
-app.use('/admin', checkAdminAuth, admin)
-const login = require('./routes/login')
-app.use('/login', login)
+const user = require('./routes/user');
+app.use('/user', checkAuth, user);
+const admin = require('./routes/admin');
+app.use('/admin', checkAdminAuth, admin);
+const login = require('./routes/login');
+app.use('/login', login);
 
 
 
 
 // ----DATABASE CONNECTION----
-mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,})
+mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 const connection = mongoose.connection;
 connection.once('open', ()=>{
-    console.log(`CONNECTED TO DATABASE`)
+    console.log(`CONNECTED TO DATABASE`);
 })
 
 // ----START SERVER----
 app.listen(port, () =>{
-    console.log(`SERVER RUNNING ON PORT ${port}`)
+    console.log(`SERVER RUNNING ON PORT ${port}`);
 })
