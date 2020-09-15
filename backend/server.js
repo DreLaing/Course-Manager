@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 // require('dotenv').config()
 const path = require('path');
-const root = path.join(__dirname, 'client', 'build')
+// const root = path.join(__dirname, 'client', 'build')
 const checkAuth = require('./middleware/check-auth')
 const checkAdminAuth = require('./middleware/check-admin-auth')
 
@@ -22,9 +22,9 @@ app.use(cors());
 
 // PRODUCTION
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(root));
+    // app.use(express.static(root));
     app.get("/", (req, res) => {
-        res.sendFile('index.html', { root });
+        res.send('Server running');
     })
 }
 
