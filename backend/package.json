@@ -9,9 +9,8 @@
 },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ng": "ng", 
-    "build": "ng build --prod", 
-    "start": "ng build --prod && node dist/server/app.js"
+    "start": "server.js"
+
   },
   "author": "",
   "license": "ISC",
