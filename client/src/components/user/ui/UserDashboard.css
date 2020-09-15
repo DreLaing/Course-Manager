@@ -4,3 +4,9 @@
     grid-template-columns: 40% 40%;
     margin-bottom: 6rem;
 }
+
+@media (max-width:952px){
+    .dashboard-content{
+        grid-template-columns: 80%;
+    }
+}

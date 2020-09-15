@@ -9,8 +9,15 @@
     bottom: 0;
 }
 
+.footer-adtelligent-logo{
+    margin-top: -15px;
+    height: 70px;
+    width: 70px;
+}
+
 .footer-container > div{
     margin: 3rem;
+    position: relative;
 }
 
 .footer-links > p{
@@ -29,6 +36,11 @@
     max-height: 150px;
     max-width: auto;
     justify-content: space-evenly;
+    column-gap: 50px;
+}
+
+.footer-certificates-container{
+    position: relative;
 }
 
 .footer-services-list > p{
@@ -51,4 +63,56 @@
 .footer-certificate-hubspot-logo{
     height: 50px;
     width: 130px;
+}
+
+@media (max-width:952px){
+    .footer-container{
+        margin-top:6rem;
+        grid-template-columns: repeat(2, 50%);
+        row-gap: 20px;
+    }
+
+    .footer-services-list{
+        grid-template-columns: 40% 40%;
+        column-gap: 50px;
+    }
+
+    .footer-certificates-container{
+        position: relative;
+        top:100px;
+    }
+}
+
+@media (max-width: 500px){
+    .footer-container{
+        grid-template-columns: 100%;
+    }
+}
+
+@media (max-width:320px){
+    .footer-container{
+        margin-top: 6rem;
+        grid-template-columns: 100%;
+        /* row-gap: 20px; */
+        justify-content: center;
+    }
+
+    .footer-services-list{
+        grid-template-columns: 40% 40%;
+        column-gap: 50px;
+    }
+
+    .footer-certificates-container{
+        position: relative;
+        top:100px;
+    }
+
+    .footer-services-list{
+        grid-template-columns: 100%;
+    }
+
+    .footer-container > div{
+        margin: 1rem;
+        left: 10%;
+    }
 }

@@ -6,7 +6,7 @@ const Footer = () => {
         <div className='footer-container'>
             <div className='footer-logo'>
                 <div>
-                    <img className='nav-adtelligent-logo' src={require('.././images/adtelligent-logo.png')}/>
+                    <img className='footer-adtelligent-logo' src={require('.././images/adtelligent-logo.png')}/>
                     <strong style={{color: 'white', fontSize: '30px', marginLeft: '-15px', fontFamily: 'Comfortaa, cursive'}}>dtelligent</strong>
                 </div>
                 <p style={{color: 'white'}}>+1 (876) 616-8756</p>
@@ -31,14 +31,14 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div style={{marginTop:'-3rem'}}>
+            <div className='footer-certificates-container' style={{marginTop:'-3rem'}}>
                 <div style={{color:'gold', fontWeight: '400'}}>Certified by:</div>
                 <div className='footer-certificates'>
                     <img className='footer-certificate-google-logo' src={require('../images/google-logo.png')}/>
                     <img className='footer-certificate-hubspot-logo' src={require('../images/hubspot-logo.png')}/>     
                 </div>
             </div>
-            <hr style={{color: 'white', height: '2px', display:'block'}}/>
+            {/* <hr style={{color: 'white', height: '2px', display:'block'}}/> */}
         </div>
     )
 }
