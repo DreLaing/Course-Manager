@@ -77,7 +77,7 @@ CRUD operations.
 
 ## Limitations
 - Currently, the administrator is unable to edit department information.
-- Not responsive.
+- Not responsive on all devices.
 
 [Back To The Top](#read-me-template)
 
