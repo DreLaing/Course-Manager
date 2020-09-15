@@ -17,7 +17,7 @@ const LoginForm = (props) => {
         e.preventDefault()
         const source = axios.CancelToken.source()
         if(props.clicked==='Sign In'){
-            axios.post('/login/',{
+            axios.post('https://adtelligent-course-manager.herokuapp.com/login/',{
             email,
             password
         }, {cancelToken: source.token} )

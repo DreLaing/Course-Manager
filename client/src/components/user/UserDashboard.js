@@ -18,7 +18,7 @@ const UserDashboard = () => {
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`/user/${JSON.parse(localStorage.getItem("user"))}`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/user/${JSON.parse(localStorage.getItem("user"))}`)
         .then(res => {
             console.log(res.data)
             setUserInfo({
