@@ -14,7 +14,7 @@ const AllCourses = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`/user/get-courses`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/user/get-courses`)
         .then(courses => {
             setCoursesInfo(courses.data)
             console.log(courses.data)
