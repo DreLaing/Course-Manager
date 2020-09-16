@@ -66,7 +66,6 @@ departments and courses.
 CRUD operations.
 <!-- ![](./screenshots/crud.png) -->
 
-[Back To The Top](#read-me-template)
 
 ---
 
@@ -79,7 +78,6 @@ CRUD operations.
 - Currently, the administrator is unable to edit department information.
 - Not responsive on all devices.
 
-[Back To The Top](#read-me-template)
 
 ---
 
@@ -107,7 +105,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[Back To The Top](#read-me-template)
 
 ---
 
