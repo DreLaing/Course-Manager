@@ -10,7 +10,7 @@ const DeleteCourseModal = (props) => {
     axios.defaults.headers.common = {'Authorization': `Bearer ${props.token}`}
 
     const deleteCourse = () =>{
-        axios.delete(`/admin/delete-course/${courseID}`)
+        axios.delete(`https://adtelligent-course-manager.herokuapp.com/admin/delete-course/${courseID}`)
         .then(course =>{
             console.log(course)
             history.push('/admin')

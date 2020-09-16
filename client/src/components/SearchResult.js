@@ -16,7 +16,7 @@ const SearchResult = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`/${userType}/find/${searchValue}`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/${userType}/find/${searchValue}`)
         .then(res => {
             setSearchResults(res.data)
             console.log(res.data)

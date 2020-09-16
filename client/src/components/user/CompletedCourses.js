@@ -17,7 +17,7 @@ const CompletedCourses = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`/user/completed/${userID}`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/user/completed/${userID}`)
         .then(courses =>{
             setCourses(courses.data)
             console.log(courses.data)

@@ -8,7 +8,7 @@ const AddDepartmentModal = (props) => {
     
     axios.defaults.headers.common = {'Authorization': `Bearer ${props.token}`}
     const addDepartment = () =>{
-        axios.post(`/admin/new-department`, {
+        axios.post(`https://adtelligent-course-manager.herokuapp.com/admin/new-department`, {
             department
         })
         .then(()=>{

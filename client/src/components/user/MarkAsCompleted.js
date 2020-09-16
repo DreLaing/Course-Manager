@@ -6,7 +6,7 @@ const MarkAsCompleted = ({ setCourseInfo, courseID, userID, courseInfo, referenc
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 
     const markAsCompleted = () =>{
-        axios.post(`/user/completed/${userID}/${courseID}`,{})
+        axios.post(`https://adtelligent-course-manager.herokuapp.com/user/completed/${userID}/${courseID}`,{})
         .then(()=>{
             setCourseInfo({...courseInfo, registered:'no'})
             window.location.reload()

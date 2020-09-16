@@ -50,7 +50,7 @@ const CourseContent = () => {
 
     const submitFeedback = () =>{
         if(feedback.comment!==''){
-            axios.post(`/user/feedback/${userID}/${courseID}`,{
+            axios.post(`https://adtelligent-course-manager.herokuapp.com/user/feedback/${userID}/${courseID}`,{
             user: email,
             comment: feedback.comment,
             rating: feedback.rating
@@ -61,7 +61,7 @@ const CourseContent = () => {
     }
 
     useEffect(()=>{
-        axios.get(`/user/get-course/${userID}/${courseID}`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/user/get-course/${userID}/${courseID}`)
         .then(course => {
             console.log(course.data)
             setCourseInfo({
@@ -79,7 +79,7 @@ const CourseContent = () => {
     }, [])
 
     const registerForCourse = () =>{
-        axios.post(`/user/add-course/${userID}/${courseID}`,{})
+        axios.post(`https://adtelligent-course-manager.herokuapp.com/user/add-course/${userID}/${courseID}`,{})
         .then(setCourseInfo({...courseInfo, registered:'yes'}))
         .catch(err => console.log(err))
     }

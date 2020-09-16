@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
     useEffect(()=>{
         axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-        axios.get(`/admin/get-courses`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/admin/get-courses`)
         .then(courses => {
             console.log(courses.data)
             setCoursesInfo(courses.data)

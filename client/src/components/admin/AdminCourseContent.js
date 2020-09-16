@@ -31,7 +31,7 @@ const AdminCourseContent = () => {
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     
     useEffect(()=>{
-        axios.get(`/admin/get-course/${courseID}`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/admin/get-course/${courseID}`)
         .then(course => {
             setCourseInfo({
                 coursename: course.data.coursename,
@@ -46,7 +46,7 @@ const AdminCourseContent = () => {
             console.log(err)
         })
 
-        axios.get(`/admin/get-departments`)
+        axios.get(`https://adtelligent-course-manager.herokuapp.com/admin/get-departments`)
         .then(departments => {
             console.log(departments.data)
             setDepartments(departments.data)
@@ -97,7 +97,7 @@ const AdminCourseContent = () => {
     }
 
     const makeUpdate = () =>{
-        axios.post(`/admin/edit-course/${courseID}`,{
+        axios.post(`https://adtelligent-course-manager.herokuapp.com/admin/edit-course/${courseID}`,{
             coursename: courseInfo.coursename,
             skills: courseInfo.skills,
             content: courseInfo.content

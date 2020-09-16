@@ -13,7 +13,7 @@ const CreateUser = () => {
 
     axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
     const submitUser = () =>{
-        axios.post(`/admin/new-user`,{
+        axios.post(`https://adtelligent-course-manager.herokuapp.com/admin/new-user`,{
             email: newUser.email,
             password: newUser.password,
             userType: newUser.userType
