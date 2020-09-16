@@ -18,6 +18,11 @@ const CreateUser = () => {
             password: newUser.password,
             userType: newUser.userType
         })
+        setNewUser({
+            email: '',
+            password:'',
+            userType: '',
+        })
     }
 
     const emailRegex = /\S+@\S+\.\S+/
@@ -38,7 +43,7 @@ const CreateUser = () => {
     return (
         <>
             <AdminNav />
-            <form class="text-center container" action="#!" style={
+            <form class="text-center container" onSubmit={submitUser} style={
                 {
                     width: '500px',
                     backgroundColor:'white', 
@@ -80,7 +85,7 @@ const CreateUser = () => {
                 </select>
 
                 {/* <!-- Create user button --> */}
-                <button class="btn btn-indigo" disabled={disabled} type="submit" style={{marginLeft:'5px'}} onClick={()=>submitUser()}>Create User</button>
+                <button class="btn btn-indigo" disabled={disabled} type="submit" style={{marginLeft:'5px'}}>Create User</button>
 
 
             </form>

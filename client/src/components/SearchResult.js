@@ -42,9 +42,11 @@ const SearchResult = () => {
         <div>
             <AdminNav />
             <SearchBar userType={userType}/>
+            <h4 style={{position: 'relative', left: '5%'}} className='container'>Results for <span style={{fontWeight:'bold'}}>"{searchValue}"</span></h4>
             <div className='dashboard-content container'>
-                {searchResults.length===0 ? <h3>No Results Found </h3> : searchResults.map((course, index) => <Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/admin/${course._id}`}>
-                        <CourseCard course={course}/> </Link>)}
+                {searchResults.length===0 ? <h3>No Results Found </h3> : searchResults.map((course, index) => {
+                        return <Link key={index} onClick={()=> localStorage.setItem('course', JSON.stringify(course._id))} to={`/admin/${course._id}`}>
+                        <CourseCard course={course}/> </Link>})}    
             </div>
         </div>}
         </>

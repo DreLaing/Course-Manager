@@ -116,9 +116,10 @@ const AdminCourseContent = () => {
       return <form className='edit-mode' onSubmit={()=>makeUpdate()}>
        
         <div class="md-form form-lg form-course-title">
-        Coursename:<input className='edit-mode-coursename' type='text' 
+        <span style={{fontWeight:'bold'}}>Coursename:</span><input className='edit-mode-coursename form-control form-control-lg' type='text' 
                         defaultValue={courseInfo.coursename} 
                         onChange={e => setCourseInfo({...courseInfo, coursename:e.target.value})}
+                        style={{borderBottom:'blue'}}
                     />
                 </div>
         {/* ----SELECT DEPARTMENT---- */}
@@ -133,13 +134,13 @@ const AdminCourseContent = () => {
 
                     {/* ----COURSE RESOURCES---- */}
                     <div className='resource-column edit-mode-resource-column'>
-                        Resources:
+                        <span style={{fontWeight:'bold'}}>Resources</span>
                         {courseInfo.content.map((content, index)=>{
                             return <div className='resource-container' key={index}>                   
                                 <div>
                                     <div class="md-form input-container">
                                         
-                                        Resource name: <input type="text" id="inputMDEx" class="form-control" placeholder='Resource name' name='resource' value={content.resource} onChange={e => handleResourceChange(e, index)}/>
+                                    <span style={{fontWeight:'bold'}}>Resource name:</span> <input type="text" id="inputMDEx" class="form-control" placeholder='Resource name' name='resource' value={content.resource} onChange={e => handleResourceChange(e, index)}/>
                                         {/* <label for="inputMDEx">Name of resource</label> */}
                                     </div>
                                     <div class="md-form form-sm input-container">
@@ -159,7 +160,7 @@ const AdminCourseContent = () => {
 
                     {/* COURSE SKILLS */}
                     <div className='skill-column edit-mode-skill-column'>
-                        <h5>Skills <i class="fa fa-cogs" aria-hidden="true"></i></h5>
+                    <span style={{fontWeight:'bold'}}>Skills</span> {/*<i class="fa fa-cogs" aria-hidden="true"></i>*/}
                         {courseInfo.skills.map((skill, index)=>{
                             return <div key={index} className='skills-container'>
                                 <div>

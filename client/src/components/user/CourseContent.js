@@ -55,7 +55,14 @@ const CourseContent = () => {
             comment: feedback.comment,
             rating: feedback.rating
         })
-        .then(res => setCourseInfo({...courseInfo, feedback: res.data.feedback}))
+        .then(res => {
+            setCourseInfo({...courseInfo, feedback: res.data.feedback})
+            setFeedback({
+                comment: '',
+                rating: ''
+            })
+            setDisabled(true)
+        })
         .catch(err => console.log(err))
         }
     }

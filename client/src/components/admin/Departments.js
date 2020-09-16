@@ -29,7 +29,7 @@ const Departments = () => {
             <AdminNav />
             <div className='container'>
                 <h1 style={{fontWeight:'500', marginTop:'20px'}}>List of Departments</h1>
-                <hr style={{borderTop: '1px solid rgb(233, 111, 41)'}}/>
+                {/* <hr style={{borderTop: '1px solid rgb(233, 111, 41)'}}/> */}
                 <button type="button" class="btn btn-deep-orange"
                     onClick={() =>{ 
                         modal.current.classList.add('active');}}>
@@ -40,14 +40,14 @@ const Departments = () => {
                     gridTemplateColumns: '50% 50%',
                     marginBottom: '4rem'
                 }}>
-                    {departments.map((department,index) => <h1 style={{
+                    {departments.map((department,index) => <h3 style={{
                         fontWeight:'600', margin:'2rem', 
                         whiteSpace:'nowrap',
                         backgroundColor: 'white',
                         padding: '15px',
                         borderRadius:'5px',
                         color:' rgb(0, 46, 65)'
-                        }} key={index}>{department.department}</h1>)}
+                        }} key={index}>{department.department}</h3>)}
                 </div>
             </div>
             <div ref={modal} className='modal-bg'>

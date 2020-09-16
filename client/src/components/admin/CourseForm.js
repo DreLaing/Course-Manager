@@ -118,7 +118,7 @@ const CourseForm = () => {
                     setDepartment(e.target.value)
                     enable()
                 }}>
-                <option>Select Department</option>
+                <option disabled={true}>Select Department</option>
                     {departments.map((department, index) =>{
                         return <option key={index} value={department._id}>{department.department}</option>
                     })}

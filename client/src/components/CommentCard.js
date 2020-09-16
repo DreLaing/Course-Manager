@@ -23,7 +23,7 @@ const CommentCard = (props) => {
                         return <h6 key={index}>{star}</h6>
                     })}
                 </div>
-                <h5 style={{width: '80%'}}>{props.comment}</h5>
+                <h5 style={{width: '80%', fontWeight:'400'}}>{props.comment}</h5>
             </div>
         </div>
     )
